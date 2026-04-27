@@ -11,13 +11,13 @@ public class CustomerDTO {
     private String email;
     private String phoneNumber;
     private BikeDTO bikeDTO;
-    private AddressDTO adressDTO;
+    private AdressDTO adressDTO;
 
     /**
      * This is a constructor for the CustomerDTO class.
      */
     public CustomerDTO(String customerID, String fullName, String email, 
-                   String phoneNumber, BikeDTO bikeDTO, AddressDTO adressDTO) {
+                   String phoneNumber, BikeDTO bikeDTO, AdressDTO adressDTO) {
         this.customerID = customerID;
         this.fullName = fullName;
         this.email = email;
