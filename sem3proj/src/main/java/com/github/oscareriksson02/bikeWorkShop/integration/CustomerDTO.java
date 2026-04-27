@@ -11,7 +11,7 @@ public class CustomerDTO {
     private String email;
     private String phoneNumber;
     private BikeDTO bikeDTO;
-    private AddressDTO adressDTO;
+    private AdressDTO adressDTO;
 
     /**
      * This is a constructor for the CustomerDTO class.
