@@ -1,5 +1,4 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
-
 import com.github.oscareriksson02.bikeWorkShop.integration.BikeDTO;
 
 /**
