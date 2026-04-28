@@ -17,15 +17,30 @@ public class View {
     public View(Controller controller) {
         this.contr = controller;
     }
-
-    private void searchCustomer(String number)
+    
+    /**
+     * Searches customer via number and prints out full details
+     * @param number
+     */
+    public void searchCustomer(String number)
     {
         CustomerDTO cust = contr.searchCustomer(number);
-        // Print cust
+        if (cust != null) {
+            System.out.println(cust);
+        }
+        else {
+            System.out.println("Customer doesn't exist");
+        }
+        
     }
 
+<<<<<<< HEAD
     private void findOrdersByState(int state) {
         List<OrderDTO> orders = Controller.findOrdersByState(state);
         
     }
+=======
+
+
+>>>>>>> a88f5aa63541c275859d8b76739a50787e6074b0
 }

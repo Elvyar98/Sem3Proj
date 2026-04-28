@@ -31,6 +31,12 @@ public class Controller {
         this.printer = printer;
     }
 
+    /**
+     * Searches customer via number and returns CustomerDTO
+     * @param number
+     * @return CustomerDTO
+     */
+
     public CustomerDTO searchCustomer(String number)
     {
         CustomerDTO cust = customerRegistry.searchCustomer(number);
