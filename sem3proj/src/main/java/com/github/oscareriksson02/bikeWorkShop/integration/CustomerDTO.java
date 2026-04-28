@@ -1,5 +1,5 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
-import com.github.oscareriksson02.bikeWorkShop.integration.BikeDTO;
+
 
 /**
  * This is a class for the Customer Data Transfer Object (DTO). .
@@ -12,6 +12,7 @@ public class CustomerDTO {
     private BikeDTO bikeDTO;
     private AdressDTO adressDTO;
 
+    
     /**
      * This is a constructor for the CustomerDTO class.
      */
@@ -23,6 +24,13 @@ public class CustomerDTO {
         this.phoneNumber = phoneNumber;
         this.bikeDTO = bikeDTO;
         this.adressDTO = adressDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + customerID + ", Name: " + fullName + 
+        ", Email: " + email + ", Phone: " + phoneNumber + "\n " + bikeDTO +
+        "\n" + adressDTO + "\n";
     }
 
     public String getCustomerID() {

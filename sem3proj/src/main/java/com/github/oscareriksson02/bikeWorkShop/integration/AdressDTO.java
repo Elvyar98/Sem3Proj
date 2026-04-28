@@ -21,6 +21,11 @@ public class AdressDTO {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+    return "Street Adress: " + streetAdress + ", Zip Code " + zipCode + ", City: " + city;
+    }
+
     /**
      * Getters for AdressDTO
      * @return streetAdress;

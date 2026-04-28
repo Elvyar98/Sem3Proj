@@ -13,11 +13,23 @@ public class View {
     public View(Controller controller) {
         this.contr = controller;
     }
-
-    private void searchCustomer(String number)
+    
+    /**
+     * Searches customer via number and prints out full details
+     * @param number
+     */
+    public void searchCustomer(String number)
     {
         CustomerDTO cust = contr.searchCustomer(number);
-        // Print cust
+        if (cust != null) {
+            System.out.println(cust);
+        }
+        else {
+            System.out.println("Customer doesn't exist");
+        }
+        
     }
+
+
 
 }

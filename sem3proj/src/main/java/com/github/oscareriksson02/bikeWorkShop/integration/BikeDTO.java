@@ -21,6 +21,11 @@ public class BikeDTO {
         this.bikeSerialNumber = bikeSerialNumber;
     }
 
+    @Override
+    public String toString() {
+    return "Bike Brand: " + bikeBrand + ", Bike Model " + bikeModel + ", Bike Serial Number: " + bikeSerialNumber;
+    }
+
     /**
      * Getters for BikeDTO Class
      * @return bikeBrand

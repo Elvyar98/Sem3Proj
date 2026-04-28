@@ -18,7 +18,11 @@ public class Main {
         RegistryCreator creator = new RegistryCreator();
         Printer printer = new Printer();
         Controller contr = new Controller(creator, printer);
-        new View(contr);
+        View view = new View(contr);
+
+        view.searchCustomer("0701234547");
     }
+
+    
 
 }
