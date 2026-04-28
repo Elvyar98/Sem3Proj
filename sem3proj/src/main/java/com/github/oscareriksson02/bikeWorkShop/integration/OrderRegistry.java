@@ -18,11 +18,11 @@ public class OrderRegistry {
     }
 
     public OrderRegistry() {
-        OrderDTO kallesOrder= new OrderDTO(1, null, "Punkterat bakdäck", 1, "Byt innertub backdäck", "datum här");
+        OrderDTO kallesOrder= new OrderDTO(1, null, "Punkterat bakdäck");
         orders.add(kallesOrder);
     }
 
-    public List<OrderDTO> findOrdersByState(int state) {
+    public List<OrderDTO> findOrdersByState(String state) {
 
         List<OrderDTO> orderStateMatches = new ArrayList<>();
 

@@ -44,7 +44,7 @@ public class View {
         System.out.println(orderId);
     }
 
-    public void printOrdersByState(int state) {
+    public void printOrdersByState(String state) {
         List<OrderDTO> orders = contr.findOrdersByState(state);
         
         for (OrderDTO orderDTO : orders) {

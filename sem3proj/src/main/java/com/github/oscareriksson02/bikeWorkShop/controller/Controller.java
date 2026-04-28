@@ -45,7 +45,7 @@ public class Controller {
         return orderRegistry.createNewRepairOrder(phoneNumber, problemDescription);
     }
 
-    public List<OrderDTO> findOrdersByState(int state) {
+    public List<OrderDTO> findOrdersByState(String state) {
         return orderRegistry.findOrdersByState(state);
     }
 

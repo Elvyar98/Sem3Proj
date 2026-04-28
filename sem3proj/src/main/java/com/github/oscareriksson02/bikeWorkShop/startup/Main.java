@@ -21,7 +21,7 @@ public class Main {
         View view = new View(contr);
 
         //view.searchCustomer("0701234567");
-        view.printOrdersByState(1);
+        view.printOrdersByState("Newly Created");
 
     }
 }

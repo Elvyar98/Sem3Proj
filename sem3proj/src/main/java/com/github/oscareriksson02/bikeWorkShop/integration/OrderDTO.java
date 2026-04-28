@@ -1,8 +1,8 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
 
-import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * This is a class for the Order Data Transfer Object (DTO).
