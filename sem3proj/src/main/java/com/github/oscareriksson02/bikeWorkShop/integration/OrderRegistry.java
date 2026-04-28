@@ -18,7 +18,7 @@ public class OrderRegistry {
     }
 
     public OrderRegistry() {
-        OrderDTO kallesOrder= new OrderDTO(1, "dagens datum", null, "Punkterat bakdäck", 1, "Byt innertub backdäck", "datum här");
+        OrderDTO kallesOrder= new OrderDTO(1, null, "Punkterat bakdäck", 1, "Byt innertub backdäck", "datum här");
         orders.add(kallesOrder);
     }
 

@@ -18,7 +18,7 @@ public class OrderDTO {
 
 
     public OrderDTO(int orderID, CustomerDTO customerDTO,
-                String problemDescription) {
+ String problemDescription) {
         this.orderID = orderID;
         this.dateOfCreation = LocalDate.now();
         this.customerDTO = customerDTO;
@@ -37,7 +37,7 @@ public class OrderDTO {
         return orderID;
     }
 
-    public String getDateOfCreation() {
+    public LocalDate getDateOfCreation() {
         return dateOfCreation;
     }
 
@@ -53,7 +53,7 @@ public class OrderDTO {
         return state;
     }
 
-    public String getRepairTasks() {
+    public List<RepairTaskDTO> getRepairTasks() {
         return repairTasks;
     }
 
