@@ -9,6 +9,13 @@ import java.util.List;
  */
 public class OrderRegistry {
     private List<OrderDTO> orders = new ArrayList<>();
+    private CustomerRegistry cusReg;
+    private int counter = 0;
+
+
+    private int generateOrderId(int counter) {
+        return counter + 1;
+    }
 
     public OrderRegistry() {
         OrderDTO kallesOrder= new OrderDTO(1, "dagens datum", null, "Punkterat bakdäck", 1, "Byt innertub backdäck", "datum här");
@@ -26,6 +33,18 @@ public class OrderRegistry {
 
         }
         return orderStateMatches;
+
+    }
+
+    public int createNewRepairOrder(String phoneNumber, String problemDescription) {
+        int orderID = generateOrderId(counter);
+
+        CustomerDTO customer = cusReg.searchCustomer(phoneNumber);
+        OrderDTO repairOrder = new OrderDTO(orderID, customer, problemDescription);
+        orders.add(repairOrder);
+        counter++;
+
+        return repairOrder.getOrderID();
 
     }
 

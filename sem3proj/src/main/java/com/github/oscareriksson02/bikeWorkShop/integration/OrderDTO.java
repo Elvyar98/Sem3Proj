@@ -1,27 +1,29 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
 
+import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 /** 
  * This is a class for the Order Data Transfer Object (DTO).
  */
 public class OrderDTO {
     private int orderID;
-    private String dateOfCreation;
+    private LocalDate dateOfCreation;
     private CustomerDTO customerDTO;
     private String problemDescription;
-    private int state;
-    private String repairTasks;
+    private String state;
+    private List<RepairTaskDTO> repairTasks = new ArrayList<>();
     private String estimatedTimeOfCompletion;
 
-    public OrderDTO(int orderID, String dateOfCreation, CustomerDTO customerDTO,
-                String problemDescription, int state, String repairTasks,
-                String estimatedTimeOfCompletion) {
+
+    public OrderDTO(int orderID, CustomerDTO customerDTO,
+                String problemDescription) {
         this.orderID = orderID;
-        this.dateOfCreation = dateOfCreation;
+        this.dateOfCreation = LocalDate.now();
         this.customerDTO = customerDTO;
         this.problemDescription = problemDescription;
-        this.state = state;
-        this.repairTasks = repairTasks;
-        this.estimatedTimeOfCompletion = estimatedTimeOfCompletion;
+        this.state =  "Newly Created";
 }
 
     @Override
@@ -47,7 +49,7 @@ public class OrderDTO {
         return problemDescription;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
