@@ -21,7 +21,8 @@ public class Main {
         View view = new View(contr);
 
         //view.searchCustomer("0701234567");
-        view.printOrdersByState("Newly Created");
+        view.createRepairOrder("0701234567", "Punkterat bakdäck");
+        //view.printOrdersByState("Newly Created");
 
     }
 }

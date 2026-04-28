@@ -41,7 +41,7 @@ public class View {
      */
     public void createRepairOrder(String phoneNumber, String problemDescription) {
         int orderId = contr.createNewRepairOrder(phoneNumber, problemDescription);
-        System.out.println(orderId);
+        System.out.println("Customers Order Id: " + orderId);
     }
 
     public void printOrdersByState(String state) {

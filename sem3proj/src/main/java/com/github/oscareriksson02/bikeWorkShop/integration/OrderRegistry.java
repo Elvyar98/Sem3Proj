@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class OrderRegistry {
     private List<OrderDTO> orders = new ArrayList<>();
-    private CustomerRegistry cusReg;
+    private CustomerRegistry cusReg = new CustomerRegistry();
     private int counter = 0;
 
 
