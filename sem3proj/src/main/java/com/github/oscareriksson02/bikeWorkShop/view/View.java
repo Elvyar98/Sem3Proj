@@ -34,6 +34,16 @@ public class View {
         
     }
 
+    /**
+     * The function prints out an orderId after creating a new repair order
+     * @param phoneNumber
+     * @param problemDescription
+     */
+    public void createRepairOrder(String phoneNumber, String problemDescription) {
+        int orderId = contr.createNewRepairOrder(phoneNumber, problemDescription);
+        System.out.println(orderId);
+    }
+
     public void printOrdersByState(int state) {
         List<OrderDTO> orders = contr.findOrdersByState(state);
         
