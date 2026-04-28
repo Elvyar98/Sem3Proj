@@ -31,9 +31,11 @@ public class View {
         else {
             System.out.println("Customer doesn't exist");
         }
-        
     }
 
+    /**
+     * Prints all ordersDTO:s in order registry with matching state value.
+     */
     public void printOrdersByState(int state) {
         List<OrderDTO> orders = contr.findOrdersByState(state);
         

@@ -35,6 +35,9 @@ public class Controller {
         return customerRegistry.searchCustomer(number);
     }
 
+    /**
+     * Returns all ordersDTO:s in order registry with matching state value as list.
+     */
     public List<OrderDTO> findOrdersByState(int state) {
         return orderRegistry.findOrdersByState(state);
     }

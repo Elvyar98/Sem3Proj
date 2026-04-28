@@ -15,6 +15,12 @@ public class OrderRegistry {
         orders.add(kallesOrder);
     }
 
+    /**
+     * Returns all ordersDTO:s in order registry with matching state value as list.
+     * 
+     * @param state order state represent progress of the order.
+     * @return List of matched orders.
+     */
     public List<OrderDTO> findOrdersByState(int state) {
 
         List<OrderDTO> orderStateMatches = new ArrayList<>();
@@ -23,10 +29,8 @@ public class OrderRegistry {
             if(orderDTO.getState() == state) {
                 orderStateMatches.add(orderDTO);
             }
-
         }
         return orderStateMatches;
-
     }
 
 }
