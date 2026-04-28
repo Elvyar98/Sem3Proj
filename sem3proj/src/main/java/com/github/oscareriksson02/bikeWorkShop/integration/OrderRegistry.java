@@ -8,9 +8,9 @@ import java.util.List;
  * It will be used by the controller to add and retrieve orders from the system.
  */
 public class OrderRegistry {
-    private List<OrderDTO> orders = new ArrayList<>();
-    private CustomerRegistry cusReg = new CustomerRegistry();
-    private int counter = 0;
+    private List<OrderDTO> orders;
+    private CustomerRegistry cusReg;
+    private int counter;
 
 
     private int generateOrderId(int counter) {
@@ -18,9 +18,11 @@ public class OrderRegistry {
     }
 
     public OrderRegistry() {
-        OrderDTO kallesOrder= new OrderDTO(1, null, "Punkterat bakdäck");
-        orders.add(kallesOrder);
+       cusReg = new CustomerRegistry();
+       orders = new ArrayList<>();
+       counter = 0;
     }
+
 
     public List<OrderDTO> findOrdersByState(String state) {
 
