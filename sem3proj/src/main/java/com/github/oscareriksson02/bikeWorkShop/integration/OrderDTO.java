@@ -12,12 +12,16 @@ public class OrderDTO {
     private LocalDate dateOfCreation;
     private CustomerDTO customerDTO;
     private String problemDescription;
-    private int totalCost;
     private String state;
     private List<RepairTaskDTO> repairTasks = new ArrayList<>();
     private String estimatedTimeOfCompletion;
 
-
+    /**
+     * Constructor for an Order DTO object
+     * @param orderID
+     * @param customerDTO
+     * @param problemDescription
+     */
     public OrderDTO(int orderID, CustomerDTO customerDTO,
  String problemDescription) {
         this.orderID = orderID;
@@ -31,8 +35,13 @@ public class OrderDTO {
     public String toString() {
         return "OrderID: " + orderID + ", Date Of Creation: " + dateOfCreation + 
         "\n" + "CustomerDTO: " + customerDTO+ 
-        "\n" + "Problem description: " + problemDescription + ", State: " + state + ", Repair tasks: " + repairTasks + "Total Cost: " + totalCost + ", Estimated time of completion: " + estimatedTimeOfCompletion;  
+        "\n" + "Problem description: " + problemDescription + ", State: " + state + ", Repair tasks: " + repairTasks + ", Estimated time of completion: " + estimatedTimeOfCompletion;  
     }
+
+    /**
+     * Getters for the Order DTO Class
+     * @return
+     */
 
     public int getOrderID() {
         return orderID;
@@ -62,9 +71,17 @@ public class OrderDTO {
         return estimatedTimeOfCompletion;
     }
 
+    /**
+     * Add repair task to repairTasks list
+     * @param repairTask
+     */
+
     public void addRepairTask(RepairTaskDTO repairTask) {
         repairTasks.add(repairTask);
     }
-}
 
+    
+
+
+}
 

@@ -62,5 +62,7 @@ public class View {
 
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
         contr.addRepairTask(1,"Byt däcktub", 400);
+        contr.addRepairTask(1,"Byt kedja", 1000);
+
     }
 }
