@@ -23,6 +23,7 @@ public class Main {
         view.searchCustomer("0701234567");
         view.createRepairOrder("0701234567", "Punkterat bakdäck");
         view.printOrdersByState("Newly Created");
+        view.addRepairTask(1, "Byt däcktub", 400);
 
     }
 }

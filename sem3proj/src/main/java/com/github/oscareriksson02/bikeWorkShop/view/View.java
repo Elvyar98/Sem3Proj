@@ -51,5 +51,14 @@ public class View {
         }
     }
 
-    
+    /**
+     * Adds repair task description and cost to order via orderId
+     * @param orderId
+     * @param repairTaskDescription
+     * @param cost
+     */
+
+    public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
+        contr.addRepairTask(1,"Byt däcktub", 400);
+    }
 }
