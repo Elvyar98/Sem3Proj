@@ -32,10 +32,8 @@ public class OrderRegistry {
             if(orderDTO.getState() == state) {
                 orderStateMatches.add(orderDTO);
             }
-
         }
         return orderStateMatches;
-
     }
 
     public int createNewRepairOrder(String phoneNumber, String problemDescription) {

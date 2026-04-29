@@ -30,7 +30,6 @@ public class View {
         else {
             System.out.println("Customer doesn't exist");
         }
-        
     }
 
     /**
@@ -42,7 +41,10 @@ public class View {
         int orderId = contr.createNewRepairOrder(phoneNumber, problemDescription);
         System.out.println("Customers Order Id: " + orderId);
     }
-
+    
+    /**
+    * Prints all ordersDTO:s in order registry with matching state value.
+    */
     public void printOrdersByState(String state) {
         List<OrderDTO> orders = contr.findOrdersByState(state);
         

@@ -30,6 +30,10 @@ public class Controller {
         this.printer = printer;
     }
 
+
+    /**
+     * Returns customer with given number from customerRegistry.
+     */
     public CustomerDTO searchCustomer(String number)
     {
         return customerRegistry.searchCustomer(number);
@@ -45,6 +49,11 @@ public class Controller {
         return orderRegistry.createNewRepairOrder(phoneNumber, problemDescription);
     }
 
+    /**
+     * Returns all ordersDTO:s in order registry with matching state value as list.
+     * @param state State of oreder completion
+     * @return List of matching order DTO:s
+     */
     public List<OrderDTO> findOrdersByState(String state) {
         return orderRegistry.findOrdersByState(state);
     }
