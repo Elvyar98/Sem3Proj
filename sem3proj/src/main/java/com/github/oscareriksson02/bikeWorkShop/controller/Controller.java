@@ -66,6 +66,7 @@ public class Controller {
         RepairTaskDTO repairTask = new RepairTaskDTO(repairTaskDescription, cost);
         Order order = new Order(orderId, orderRegistry);
         order.addRepairTask(repairTask);
+
     }
 
 }
