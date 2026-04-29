@@ -19,7 +19,6 @@ import java.util.List;
 public class Controller {
     private CustomerRegistry customerRegistry;
     private OrderRegistry orderRegistry;
-    private Order order;
     private Printer printer;
     
 
@@ -68,5 +67,6 @@ public class Controller {
         order.addRepairTask(repairTask);
 
     }
+
 
 }

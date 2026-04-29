@@ -6,7 +6,6 @@ import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 
 public class Order {
    private OrderDTO orderDTO;
-   private int totalCost;
   
 
     /**
@@ -18,10 +17,6 @@ public class Order {
         this.orderDTO = orderRegistry.findOrderById(orderID);
     }
 
-     @Override
-    public String toString() {
-        return orderDTO + ", Total Cost: " + totalCost;  
-    }
 
     /**
      * adds a repair task to the DTO
@@ -33,15 +28,20 @@ public class Order {
         calculateTotalCost();
     }
 
-    public int getTotalCost() {
-        return totalCost;
-    }
 
-    private void calculateTotalCost() {
-        totalCost = 0;
+    private int calculateTotalCost() {
+        int totalCost = 0;
         for(RepairTaskDTO repairTaskDTO : orderDTO.getRepairTasks()) {
             totalCost += repairTaskDTO.getCost();
         }
+
+        return totalCost;
     }
+
+    public void acceptRepairOrder() {
+        this.state = "Order Accepted";
+    }
+
+
 
 }

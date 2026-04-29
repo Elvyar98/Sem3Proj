@@ -65,4 +65,5 @@ public class View {
         contr.addRepairTask(1,"Byt kedja", 1000);
 
     }
+
 }
