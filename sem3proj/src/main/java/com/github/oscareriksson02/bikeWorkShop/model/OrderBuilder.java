@@ -13,7 +13,7 @@ public class OrderBuilder {
     private CustomerDTO customerDTO;
     private String problemDescription;
     private int totalCost;
-    private String state;
+    private OrderState state;
     private List<RepairTaskDTO> repairTasks;
     private String diagnosticReport;
     private String estimatedTimeOfCompletion;
@@ -38,7 +38,7 @@ public class OrderBuilder {
         private CustomerDTO customerDTO;
         private String problemDescription;
         private int totalCost;
-        private String state;
+        private OrderState state;
         private List<RepairTaskDTO> repairTasks;
         private String diagnosticReport;
         private String estimatedTimeOfCompletion;
@@ -57,14 +57,14 @@ public class OrderBuilder {
         }
 
         // One method per field you might want to override
-        public Builder state(String state) {
+        public Builder state(OrderState state) {
             this.state = state;
             return this;
         }
 
         public Builder diagnosticReport(String diagnosticReport) {
             this.diagnosticReport = diagnosticReport;
-            state("Ready for approval");
+            state(OrderState.READY_FOR_APPROVAL);
             return this;
         }
 

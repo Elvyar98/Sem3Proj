@@ -8,6 +8,7 @@ import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
 import com.github.oscareriksson02.bikeWorkShop.model.Order;
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class Controller {
      * @param state State of oreder completion
      * @return List of matching order DTO:s
      */
-    public List<OrderDTO> findOrdersByState(String state) {
+    public List<OrderDTO> findOrdersByState(OrderState state) {
         return orderRegistry.findOrdersByState(state);
     }
 

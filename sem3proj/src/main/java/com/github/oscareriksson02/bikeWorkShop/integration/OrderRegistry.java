@@ -3,6 +3,8 @@ package com.github.oscareriksson02.bikeWorkShop.integration;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
+
 
 /**
  * This class is responsible for storing the orders in the system.
@@ -25,7 +27,7 @@ public class OrderRegistry {
     }
 
 
-    public List<OrderDTO> findOrdersByState(String state) {
+    public List<OrderDTO> findOrdersByState(OrderState state) {
 
         List<OrderDTO> orderStateMatches = new ArrayList<>();
 

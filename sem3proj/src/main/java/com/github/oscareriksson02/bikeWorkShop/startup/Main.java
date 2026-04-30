@@ -2,6 +2,7 @@ package com.github.oscareriksson02.bikeWorkShop.startup;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
 import com.github.oscareriksson02.bikeWorkShop.model.OrderBuilder;
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Main {
 
         view.searchCustomer("0701234567");
         view.createRepairOrder("0701234567", "Punkterat bakdäck");
-        view.printOrdersByState("Newly Created");
+        view.printOrdersByState(OrderState.NEWLY_CREATED);
         view.addRepairTask(1, "Byt däcktub", 400);
         view.addDiagnosticReport(1, "Vi kommer ta alla dina pengar", "2026-09-30");
 

@@ -1,5 +1,6 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
 
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class OrderDTO {
     private CustomerDTO customerDTO;
     private String problemDescription;
     private int totalCost;
-    private String state;
+    private OrderState state;
     private List<RepairTaskDTO> repairTasks;
     private String diagnosticReport;
     private String estimatedTimeOfCompletion;
@@ -31,7 +32,7 @@ public class OrderDTO {
         this.customerDTO = customerDTO;
         this.problemDescription = problemDescription;
         this.totalCost = 0;
-        this.state =  "Newly Created";
+        this.state =  OrderState.NEWLY_CREATED;
         this.repairTasks = new ArrayList<>();
         this.diagnosticReport = " ";
         this.estimatedTimeOfCompletion = " ";
@@ -50,7 +51,7 @@ public class OrderDTO {
  */
 
 public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
- String problemDescription, int totalCost, String state, List<RepairTaskDTO> repairTasks, String diagnosticReport,String estimatedTimeOfCompletion) {
+ String problemDescription, int totalCost, OrderState state, List<RepairTaskDTO> repairTasks, String diagnosticReport,String estimatedTimeOfCompletion) {
         this.orderID = orderID;
         this.dateOfCreation = dateOfCreation;
         this.customerDTO = customerDTO;
@@ -97,7 +98,7 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
         return problemDescription;
     }
 
-    public String getState() {
+    public OrderState getState() {
         return state;
     }
 
