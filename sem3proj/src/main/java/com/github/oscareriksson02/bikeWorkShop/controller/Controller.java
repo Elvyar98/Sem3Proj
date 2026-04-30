@@ -61,6 +61,13 @@ public class Controller {
         return orderRegistry.findOrdersByState(state);
     }
 
+    /**
+     * Adds repair task to a specific order by using order id
+     * @param orderId
+     * @param repairTaskDescription
+     * @param cost
+     */
+
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
         RepairTaskDTO repairTask = new RepairTaskDTO(repairTaskDescription, cost);
         Order order = new Order(orderId, orderRegistry);
