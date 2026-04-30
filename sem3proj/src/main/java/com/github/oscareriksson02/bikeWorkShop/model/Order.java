@@ -37,6 +37,12 @@ public class Order {
         
     }
 
+    /**
+     * Function adds a diagnostic report to an existing orderDTO by creating a new
+     * one and replacing the one in order registry with it. 
+     * @param diagnosticReport
+     */
+
     public void addDiagnosticReport(String diagnosticReport) {
         OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
         .diagnosticReport(diagnosticReport)
@@ -44,6 +50,14 @@ public class Order {
 
         updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
 
+    }
+
+    public void addEstimatedTimeOfCompletion(String estimatedTimeOfCompletion) {
+        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
+        .estimatedTimeOfCompletion(estimatedTimeOfCompletion)
+        .build();
+
+        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
     }
 
     /**
