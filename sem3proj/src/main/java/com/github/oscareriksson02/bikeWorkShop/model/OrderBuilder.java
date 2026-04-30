@@ -63,6 +63,12 @@ public class OrderBuilder {
             return this;
         }
 
+        public Builder repairTasks(RepairTaskDTO repairTask) {
+            this.repairTasks.add(repairTask);
+            totalCost(calculateTotalCost());
+            return this;
+        }
+
         public Builder estimatedTimeOfCompletion(String eta) {
             this.estimatedTimeOfCompletion = eta;
             return this;
@@ -77,6 +83,16 @@ public class OrderBuilder {
             return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
                 totalCost, state, repairTasks, estimatedTimeOfCompletion);
         }
+        private int calculateTotalCost() {
+            int updatedCost = 0;
+            for (RepairTaskDTO repairTaskDTO : repairTasks){
+                updatedCost += repairTaskDTO.getCost();
+            }
+
+            return updatedCost;
+    }
+
+        
     }
 
     @Override

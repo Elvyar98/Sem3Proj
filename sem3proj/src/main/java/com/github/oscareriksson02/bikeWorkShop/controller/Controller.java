@@ -1,7 +1,6 @@
 package com.github.oscareriksson02.bikeWorkShop.controller;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
-import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerRegistry;
@@ -20,6 +19,7 @@ public class Controller {
     private CustomerRegistry customerRegistry;
     private OrderRegistry orderRegistry;
     private Printer printer;
+    
     
 
     /**
@@ -69,10 +69,8 @@ public class Controller {
      */
 
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
-        RepairTaskDTO repairTask = new RepairTaskDTO(repairTaskDescription, cost);
         Order order = new Order(orderId, orderRegistry);
-        order.addRepairTask(repairTask);
-
+        order.addRepairTask(repairTaskDescription, cost);
     }
 
 

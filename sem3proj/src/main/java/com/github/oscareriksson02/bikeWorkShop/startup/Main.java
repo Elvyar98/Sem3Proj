@@ -40,7 +40,7 @@ public class Main {
         System.out.println("Original: " + originalDTO);
 
         // 3. Bygg en ny OrderBuilder med ett ändrat värde
-        OrderBuilder updatedOrder = new OrderBuilder.Builder(originalDTO)
+        OrderDTO updatedOrder = new OrderBuilder.Builder(originalDTO)
         .state("In Progress")
         .build();
 

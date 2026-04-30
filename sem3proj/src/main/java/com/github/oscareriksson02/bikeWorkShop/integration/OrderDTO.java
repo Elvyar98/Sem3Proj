@@ -62,10 +62,15 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
 
 
     @Override
-    public String toString() {
-        return "OrderID: " + orderID + ", Date Of Creation: " + dateOfCreation + 
-        "\n" + "CustomerDTO: " + customerDTO+ 
-        "\n" + "Problem description: " + problemDescription + ", Repair tasks: " + repairTasks + ", Estimated time of completion: " + estimatedTimeOfCompletion;  
+   public String toString() {
+    return "OrderID: " + orderID + 
+           ", Date Of Creation: " + dateOfCreation +
+           "\nCustomer: " + customerDTO +
+           "\nProblem Description: " + problemDescription +
+           ", State: " + state +
+           "\nRepair Tasks: " + repairTasks +
+           ", Total Cost: " + totalCost +
+           ", ETA: " + estimatedTimeOfCompletion;
     }
 
     /**

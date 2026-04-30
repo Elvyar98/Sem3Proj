@@ -6,6 +6,8 @@ import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 
 public class Order {
    private OrderDTO orderDTO;
+   private OrderRegistry orderRegistry;
+
   
 
     /**
@@ -15,6 +17,7 @@ public class Order {
      */
     public Order(int orderID, OrderRegistry orderRegistry) {
         this.orderDTO = orderRegistry.findOrderById(orderID);
+        this.orderRegistry = orderRegistry;
     }
 
 
@@ -23,25 +26,22 @@ public class Order {
      * @param repairTask
      */
 
-    public void addRepairTask(RepairTaskDTO repairTask) {
-        orderDTO.addRepairTask(repairTask);
-        calculateTotalCost();
+    public void addRepairTask(String repairTaskDescription, int cost) {
+        RepairTaskDTO repairTask = new RepairTaskDTO(repairTaskDescription, cost);
+        
+        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
+        .repairTasks(repairTask)
+        .build();
+
+        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
+        
     }
 
-
-    private int calculateTotalCost() {
-        int totalCost = 0;
-        for(RepairTaskDTO repairTaskDTO : orderDTO.getRepairTasks()) {
-            totalCost += repairTaskDTO.getCost();
-        }
-
-        return totalCost;
+    private void updateOrderDTO(int orderId, OrderDTO orderDTO) {
+        orderRegistry.replaceOrderById(orderId, orderDTO);
+        this.orderDTO = orderDTO;
     }
-    /* Commmenterade ut detta så jag kan compilera koden, försök att alltid skicka compilerbar kod :P 
-    public void acceptRepairOrder() {
-        this.state = "Order Accepted";
-    }
-    */
+    
 
 
 }
