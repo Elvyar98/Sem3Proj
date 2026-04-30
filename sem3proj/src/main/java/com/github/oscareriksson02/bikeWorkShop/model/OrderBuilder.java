@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
-import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 
 public class OrderBuilder {
@@ -17,6 +16,7 @@ public class OrderBuilder {
     private String state;
     private List<RepairTaskDTO> repairTasks;
     private String estimatedTimeOfCompletion;
+
 
     private OrderBuilder(Builder builder) {
         this.orderID = builder.orderID;
@@ -70,8 +70,9 @@ public class OrderBuilder {
 
         // Add the rest of the fields the same way...
 
-        public OrderBuilder build() {
-            return new OrderBuilder(this);
+        public OrderDTO build() {
+            return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
+                totalCost, state, repairTasks, estimatedTimeOfCompletion);
         }
     }
 

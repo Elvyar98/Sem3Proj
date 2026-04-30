@@ -12,9 +12,9 @@ public class OrderDTO {
     private LocalDate dateOfCreation;
     private CustomerDTO customerDTO;
     private String problemDescription;
-    private String state;
-    private List<RepairTaskDTO> repairTasks = new ArrayList<>();
     private int totalCost;
+    private String state;
+    private List<RepairTaskDTO> repairTasks;
     private String estimatedTimeOfCompletion;
 
     /**
@@ -29,8 +29,37 @@ public class OrderDTO {
         this.dateOfCreation = LocalDate.now();
         this.customerDTO = customerDTO;
         this.problemDescription = problemDescription;
+        this.totalCost = 0;
         this.state =  "Newly Created";
+        this.repairTasks = new ArrayList<>();
+        this.estimatedTimeOfCompletion = " ";
 }
+
+/**
+ * Constructor when called from builder
+ * @param orderID
+ * @param dateOfCreation
+ * @param customerDTO
+ * @param problemDescription
+ * @param totalCost
+ * @param state
+ * @param repairTasks
+ * @param estimatedTimeOfCompletion
+ */
+
+public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
+ String problemDescription, int totalCost, String state, List<RepairTaskDTO> repairTasks, String estimatedTimeOfCompletion) {
+        this.orderID = orderID;
+        this.dateOfCreation = dateOfCreation;
+        this.customerDTO = customerDTO;
+        this.problemDescription = problemDescription;
+        this.totalCost = totalCost;
+        this.state =  state;
+        this.repairTasks = repairTasks;
+        this.estimatedTimeOfCompletion = estimatedTimeOfCompletion;
+}
+
+
 
     @Override
     public String toString() {
