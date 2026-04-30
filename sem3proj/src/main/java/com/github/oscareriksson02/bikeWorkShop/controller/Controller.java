@@ -77,10 +77,14 @@ public class Controller {
     public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
         Order order = new Order(orderId, orderRegistry);
         order.addDiagnosticReport(diagnosticReport);
-        order.addEstimatedTimeOfCompletion(estimatedTimeOfCompletion);
-        
+        order.addEstimatedTimeOfCompletion(estimatedTimeOfCompletion);     
 
     }
 
+    public String acceptRepairOrder(int orderId) {
+        Order order = new Order(orderId, orderRegistry);
+        order.acceptRepairOrder();
+        return "Order accepted.\n Printing out order";
+    }
 
 }

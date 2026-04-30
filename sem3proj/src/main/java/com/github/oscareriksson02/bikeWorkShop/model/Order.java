@@ -7,6 +7,7 @@ import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 public class Order {
    private OrderDTO orderDTO;
    private OrderRegistry orderRegistry;
+   
 
   
 
@@ -55,6 +56,14 @@ public class Order {
     public void addEstimatedTimeOfCompletion(String estimatedTimeOfCompletion) {
         OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
         .estimatedTimeOfCompletion(estimatedTimeOfCompletion)
+        .build();
+
+        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
+    }
+
+    public void acceptRepairOrder(){
+        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
+        .state(OrderState.ACCEPTED)
         .build();
 
         updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);

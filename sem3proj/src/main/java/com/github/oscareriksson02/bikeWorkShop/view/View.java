@@ -65,8 +65,21 @@ public class View {
         contr.addRepairTask(1,"Byt däcktub", 400);
     }
 
+    /**
+     * Function calls add diagnostic report function in controller
+     * @param orderId
+     * @param diagnosticReport
+     * @param estimatedTimeOfCompletion
+     */
+
     public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
         contr.addDiagnosticReport(orderId, diagnosticReport, estimatedTimeOfCompletion);
 
     }
+
+    public void acceptRepairOrder(int orderId) {
+        System.out.println(contr.acceptRepairOrder(orderId));
+    }
+
+
 }

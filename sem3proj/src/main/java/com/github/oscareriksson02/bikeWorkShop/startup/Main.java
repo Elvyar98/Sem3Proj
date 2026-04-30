@@ -32,6 +32,7 @@ public class Main {
         view.printOrdersByState(OrderState.NEWLY_CREATED);
         view.addRepairTask(1, "Byt däcktub", 400);
         view.addDiagnosticReport(1, "Vi kommer ta alla dina pengar", "2026-09-30");
+        view.acceptRepairOrder(1);
 
         /*y orderRegistry = creator.getOrderRegistry();
         System.out.println("Test Order builder: ");
