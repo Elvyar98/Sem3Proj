@@ -37,6 +37,13 @@ public class Order {
         
     }
 
+    /**
+     * Function replaces orderDTO in registry with updatedDTO
+     * It also change the reference in the order oobject to the updated one
+     * @param orderId
+     * @param orderDTO
+     */
+
     private void updateOrderDTO(int orderId, OrderDTO orderDTO) {
         orderRegistry.replaceOrderById(orderId, orderDTO);
         this.orderDTO = orderDTO;

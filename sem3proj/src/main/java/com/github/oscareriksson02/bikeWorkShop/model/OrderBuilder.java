@@ -63,6 +63,11 @@ public class OrderBuilder {
             return this;
         }
 
+        /**
+         * Adds repair tasks and calls calculate totalcost
+         * @param repairTask
+         * @return
+         */
         public Builder repairTasks(RepairTaskDTO repairTask) {
             this.repairTasks.add(repairTask);
             totalCost(calculateTotalCost());
@@ -83,6 +88,11 @@ public class OrderBuilder {
             return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
                 totalCost, state, repairTasks, estimatedTimeOfCompletion);
         }
+
+        /**
+         * Calculate total cost from repairTasks and returns it as an int
+         * @return int updatedCost
+         */
         private int calculateTotalCost() {
             int updatedCost = 0;
             for (RepairTaskDTO repairTaskDTO : repairTasks){

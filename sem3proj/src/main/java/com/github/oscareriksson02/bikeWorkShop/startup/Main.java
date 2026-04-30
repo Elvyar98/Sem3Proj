@@ -30,8 +30,9 @@ public class Main {
         view.createRepairOrder("0701234567", "Punkterat bakdäck");
         view.printOrdersByState("Newly Created");
         view.addRepairTask(1, "Byt däcktub", 400);
+        view.addDiagnosticReport(1, "Vi kommer ta alla dina pengar", "2026-09-30");
 
-        OrderRegistry orderRegistry = creator.getOrderRegistry();
+        /*y orderRegistry = creator.getOrderRegistry();
         System.out.println("Test Order builder: ");
         List<OrderDTO> orders = orderRegistry.findOrdersByState("Newly Created"); 
         OrderDTO originalDTO = orders.get(0); // End detta och raden ovan sen detta är ett litet hack
@@ -45,5 +46,6 @@ public class Main {
         .build();
 
         System.out.println("Updated: " + updatedOrder);
+        */
     }
 }
