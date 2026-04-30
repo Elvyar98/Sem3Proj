@@ -89,7 +89,7 @@ public class Controller {
     }
 
     /**
-     * Changes order state 
+     * Calls accept order in order via order id and calls printOrder function
      * @param orderId
      */
 
@@ -99,6 +99,21 @@ public class Controller {
         printOrder(orderId);
 
     }
+
+    /**
+     * Calls reject order function in order via order Id
+     * @param orderId
+     */
+
+    public void rejectRepairOrder(int orderId) {
+         Order order = new Order(orderId, orderRegistry);
+        order.rejectRepairOrder();
+        printOrder(orderId);
+    }
+
+    /*
+    Funkar bra som det ska men annars kan man också bygga printer med tillgång till orderRegistry själv
+    då behöver controller bara skicka order id och printer själv kan hitta rätt order sen skriva ut det */
 
     private void printOrder(int orderId) {
         OrderDTO orderDTO = orderRegistry.findOrderById(orderId);

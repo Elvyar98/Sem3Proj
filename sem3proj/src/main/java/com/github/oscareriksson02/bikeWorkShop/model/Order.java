@@ -77,6 +77,14 @@ public class Order {
         updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
     }
 
+    public void rejectRepairOrder(){
+        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
+        .state(OrderState.REJECTED)
+        .build();
+
+        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
+    }
+
     /**
      * Function replaces orderDTO in registry with updatedDTO
      * It also change the reference in the order oobject to the updated one

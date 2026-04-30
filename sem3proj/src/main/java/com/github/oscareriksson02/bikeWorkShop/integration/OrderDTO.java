@@ -74,8 +74,8 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
            ", State: " + state +
            ", Diagnostic Report: " + diagnosticReport +
            "\nRepair Tasks: " + repairTasks +
-           ", Total Cost: " + totalCost +
-           ", ETA: " + estimatedTimeOfCompletion;
+           "\nTotal Cost: " + totalCost +
+           ", ETC: " + estimatedTimeOfCompletion;
     }
 
     /**

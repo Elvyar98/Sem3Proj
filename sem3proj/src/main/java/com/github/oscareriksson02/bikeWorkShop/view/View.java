@@ -62,7 +62,7 @@ public class View {
      */
 
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
-        contr.addRepairTask(1,"Byt däcktub", 400);
+        contr.addRepairTask(orderId,repairTaskDescription,cost);
     }
 
     /**
@@ -77,14 +77,30 @@ public class View {
 
     }
 
+    /**
+     * Function writes text on screen and calls accept repair order function in controller
+     * @param orderId
+     */
+
     public void acceptRepairOrder(int orderId) {
         System.out.println("\n-----------------------------------------");
-        System.out.println("Order accepted.\nPrinting out order.");
+        System.out.println("Order accepted, printing out order.");
         System.out.println("-----------------------------------------");
         contr.acceptRepairOrder(orderId);
     }
 
-    
+    /**
+     * Prints out text and calls reject order function in controller
+     * @param orderId
+     */
+
+    public void rejectRepairOrder(int orderId) {
+         System.out.println("\n-----------------------------------------");
+        System.out.println("Order rejected, bye bye.");
+        System.out.println("-----------------------------------------");
+        contr.rejectRepairOrder(orderId);
+    }
+
 
 
 }
