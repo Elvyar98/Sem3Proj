@@ -78,8 +78,13 @@ public class View {
     }
 
     public void acceptRepairOrder(int orderId) {
-        System.out.println(contr.acceptRepairOrder(orderId));
+        System.out.println("\n-----------------------------------------");
+        System.out.println("Order accepted.\nPrinting out order.");
+        System.out.println("-----------------------------------------");
+        contr.acceptRepairOrder(orderId);
     }
+
+    
 
 
 }

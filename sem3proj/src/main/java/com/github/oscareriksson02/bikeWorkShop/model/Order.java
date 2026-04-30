@@ -53,6 +53,11 @@ public class Order {
 
     }
 
+    /**
+     * Updates estimated time of completion by creating a new DTO and replacing the old one in order registry
+     * @param estimatedTimeOfCompletion
+     */
+
     public void addEstimatedTimeOfCompletion(String estimatedTimeOfCompletion) {
         OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
         .estimatedTimeOfCompletion(estimatedTimeOfCompletion)
@@ -61,6 +66,9 @@ public class Order {
         updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
     }
 
+    /**
+     * Updates orderstate to ACCEPTED by creating a new DTO and replacing the old one in order registry
+     */
     public void acceptRepairOrder(){
         OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
         .state(OrderState.ACCEPTED)

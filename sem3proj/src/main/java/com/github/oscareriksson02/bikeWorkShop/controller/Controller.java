@@ -74,6 +74,13 @@ public class Controller {
         order.addRepairTask(repairTaskDescription, cost);
     }
 
+    /**
+     * Adds diagnostic report to order via order ID
+     * @param orderId
+     * @param diagnosticReport
+     * @param estimatedTimeOfCompletion
+     */
+
     public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
         Order order = new Order(orderId, orderRegistry);
         order.addDiagnosticReport(diagnosticReport);
@@ -81,10 +88,21 @@ public class Controller {
 
     }
 
-    public String acceptRepairOrder(int orderId) {
+    /**
+     * Changes order state 
+     * @param orderId
+     */
+
+    public void acceptRepairOrder(int orderId) {
         Order order = new Order(orderId, orderRegistry);
         order.acceptRepairOrder();
-        return "Order accepted.\n Printing out order";
+        printOrder(orderId);
+
+    }
+
+    private void printOrder(int orderId) {
+        OrderDTO orderDTO = orderRegistry.findOrderById(orderId);
+        printer.printOrder(orderDTO);        
     }
 
 }
