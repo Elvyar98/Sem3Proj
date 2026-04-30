@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
-import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 
 public class OrderBuilder {
@@ -14,9 +13,11 @@ public class OrderBuilder {
     private CustomerDTO customerDTO;
     private String problemDescription;
     private int totalCost;
-    private String state;
+    private OrderState state;
     private List<RepairTaskDTO> repairTasks;
+    private String diagnosticReport;
     private String estimatedTimeOfCompletion;
+
 
     private OrderBuilder(Builder builder) {
         this.orderID = builder.orderID;
@@ -26,6 +27,7 @@ public class OrderBuilder {
         this.totalCost = builder.totalCost;
         this.state = builder.state;
         this.repairTasks = builder.repairTasks;
+        this.diagnosticReport = builder.diagnosticReport;
         this.estimatedTimeOfCompletion = builder.estimatedTimeOfCompletion;
     }
 
@@ -36,8 +38,9 @@ public class OrderBuilder {
         private CustomerDTO customerDTO;
         private String problemDescription;
         private int totalCost;
-        private String state;
+        private OrderState state;
         private List<RepairTaskDTO> repairTasks;
+        private String diagnosticReport;
         private String estimatedTimeOfCompletion;
 
         // Initialize builder from DTO
@@ -49,17 +52,35 @@ public class OrderBuilder {
             this.totalCost = dto.getTotalCost();
             this.state = dto.getState();
             this.repairTasks = dto.getRepairTasks();
+            this.diagnosticReport = dto.getDiagnosticReport();
             this.estimatedTimeOfCompletion = dto.getEstimatedTimeOfCompletion();
         }
 
         // One method per field you might want to override
-        public Builder state(String state) {
+        public Builder state(OrderState state) {
             this.state = state;
+            return this;
+        }
+
+        public Builder diagnosticReport(String diagnosticReport) {
+            this.diagnosticReport = diagnosticReport;
+            state(OrderState.READY_FOR_APPROVAL);
             return this;
         }
 
         public Builder totalCost(int totalCost) {
             this.totalCost = totalCost;
+            return this;
+        }
+
+        /**
+         * Adds repair tasks and calls calculate totalcost
+         * @param repairTask
+         * @return
+         */
+        public Builder repairTasks(RepairTaskDTO repairTask) {
+            this.repairTasks.add(repairTask);
+            totalCost(calculateTotalCost());
             return this;
         }
 
@@ -69,10 +90,29 @@ public class OrderBuilder {
         }
 
         // Add the rest of the fields the same way...
-
-        public OrderBuilder build() {
-            return new OrderBuilder(this);
+        /**
+         * Returns an OrderDTO object with updated fields
+         * @return
+         */
+        public OrderDTO build() {
+            return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
+                totalCost, state, repairTasks, diagnosticReport, estimatedTimeOfCompletion);
         }
+
+        /**
+         * Calculate total cost from repairTasks and returns it as an int
+         * @return int updatedCost
+         */
+        private int calculateTotalCost() {
+            int updatedCost = 0;
+            for (RepairTaskDTO repairTaskDTO : repairTasks){
+                updatedCost += repairTaskDTO.getCost();
+            }
+
+            return updatedCost;
+    }
+
+        
     }
 
     @Override
@@ -82,6 +122,7 @@ public class OrderBuilder {
            "\nCustomer: " + customerDTO +
            "\nProblem Description: " + problemDescription +
            ", State: " + state +
+           ", Diagnostic Report: " + diagnosticReport +
            "\nRepair Tasks: " + repairTasks +
            ", Total Cost: " + totalCost +
            ", ETA: " + estimatedTimeOfCompletion;

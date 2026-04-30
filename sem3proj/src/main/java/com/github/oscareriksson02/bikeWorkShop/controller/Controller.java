@@ -1,7 +1,6 @@
 package com.github.oscareriksson02.bikeWorkShop.controller;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
-import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerRegistry;
@@ -9,6 +8,7 @@ import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
 import com.github.oscareriksson02.bikeWorkShop.model.Order;
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class Controller {
     private CustomerRegistry customerRegistry;
     private OrderRegistry orderRegistry;
     private Printer printer;
+    
     
 
     /**
@@ -57,7 +58,7 @@ public class Controller {
      * @param state State of oreder completion
      * @return List of matching order DTO:s
      */
-    public List<OrderDTO> findOrdersByState(String state) {
+    public List<OrderDTO> findOrdersByState(OrderState state) {
         return orderRegistry.findOrdersByState(state);
     }
 
@@ -69,11 +70,54 @@ public class Controller {
      */
 
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
-        RepairTaskDTO repairTask = new RepairTaskDTO(repairTaskDescription, cost);
         Order order = new Order(orderId, orderRegistry);
-        order.addRepairTask(repairTask);
+        order.addRepairTask(repairTaskDescription, cost);
+    }
+
+    /**
+     * Adds diagnostic report to order via order ID
+     * @param orderId
+     * @param diagnosticReport
+     * @param estimatedTimeOfCompletion
+     */
+
+    public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
+        Order order = new Order(orderId, orderRegistry);
+        order.addDiagnosticReport(diagnosticReport);
+        order.addEstimatedTimeOfCompletion(estimatedTimeOfCompletion);     
 
     }
 
+    /**
+     * Calls accept order in order via order id and calls printOrder function
+     * @param orderId
+     */
+
+    public void acceptRepairOrder(int orderId) {
+        Order order = new Order(orderId, orderRegistry);
+        order.acceptRepairOrder();
+        printOrder(orderId);
+
+    }
+
+    /**
+     * Calls reject order function in order via order Id
+     * @param orderId
+     */
+
+    public void rejectRepairOrder(int orderId) {
+         Order order = new Order(orderId, orderRegistry);
+        order.rejectRepairOrder();
+        printOrder(orderId);
+    }
+
+    /*
+    Funkar bra som det ska men annars kan man också bygga printer med tillgång till orderRegistry själv
+    då behöver controller bara skicka order id och printer själv kan hitta rätt order sen skriva ut det */
+
+    private void printOrder(int orderId) {
+        OrderDTO orderDTO = orderRegistry.findOrderById(orderId);
+        printer.printOrder(orderDTO);        
+    }
 
 }

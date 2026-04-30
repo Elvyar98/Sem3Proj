@@ -1,5 +1,6 @@
 package com.github.oscareriksson02.bikeWorkShop.integration;
 
+import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,10 @@ public class OrderDTO {
     private LocalDate dateOfCreation;
     private CustomerDTO customerDTO;
     private String problemDescription;
-    private String state;
-    private List<RepairTaskDTO> repairTasks = new ArrayList<>();
     private int totalCost;
+    private OrderState state;
+    private List<RepairTaskDTO> repairTasks;
+    private String diagnosticReport;
     private String estimatedTimeOfCompletion;
 
     /**
@@ -29,14 +31,51 @@ public class OrderDTO {
         this.dateOfCreation = LocalDate.now();
         this.customerDTO = customerDTO;
         this.problemDescription = problemDescription;
-        this.state =  "Newly Created";
+        this.totalCost = 0;
+        this.state =  OrderState.NEWLY_CREATED;
+        this.repairTasks = new ArrayList<>();
+        this.diagnosticReport = " ";
+        this.estimatedTimeOfCompletion = " ";
 }
 
+/**
+ * Constructor when called from builder
+ * @param orderID
+ * @param dateOfCreation
+ * @param customerDTO
+ * @param problemDescription
+ * @param totalCost
+ * @param state
+ * @param repairTasks
+ * @param estimatedTimeOfCompletion
+ */
+
+public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
+ String problemDescription, int totalCost, OrderState state, List<RepairTaskDTO> repairTasks, String diagnosticReport,String estimatedTimeOfCompletion) {
+        this.orderID = orderID;
+        this.dateOfCreation = dateOfCreation;
+        this.customerDTO = customerDTO;
+        this.problemDescription = problemDescription;
+        this.totalCost = totalCost;
+        this.state =  state;
+        this.repairTasks = repairTasks;
+        this.diagnosticReport = diagnosticReport;
+        this.estimatedTimeOfCompletion = estimatedTimeOfCompletion;
+}
+
+
+
     @Override
-    public String toString() {
-        return "OrderID: " + orderID + ", Date Of Creation: " + dateOfCreation + 
-        "\n" + "CustomerDTO: " + customerDTO+ 
-        "\n" + "Problem description: " + problemDescription + ", Repair tasks: " + repairTasks + ", Estimated time of completion: " + estimatedTimeOfCompletion;  
+   public String toString() {
+    return "OrderID: " + orderID + 
+           ", Date Of Creation: " + dateOfCreation +
+           "\nCustomer: " + customerDTO +
+           "\nProblem Description: " + problemDescription +
+           ", State: " + state +
+           ", Diagnostic Report: " + diagnosticReport +
+           "\nRepair Tasks: " + repairTasks +
+           "\nTotal Cost: " + totalCost +
+           ", ETC: " + estimatedTimeOfCompletion;
     }
 
     /**
@@ -60,7 +99,7 @@ public class OrderDTO {
         return problemDescription;
     }
 
-    public String getState() {
+    public OrderState getState() {
         return state;
     }
 
@@ -68,6 +107,10 @@ public class OrderDTO {
         return repairTasks;
     }
 
+    public String getDiagnosticReport() {
+        return diagnosticReport;
+    }
+    
     public String getEstimatedTimeOfCompletion() {
         return estimatedTimeOfCompletion;
     }
