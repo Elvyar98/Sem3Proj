@@ -49,6 +49,12 @@ public class OrderRegistry {
 
     }
 
+    /**
+     * Finds an order in the registry by orderId
+     * @param orderId
+     * @return
+     */
+
     public OrderDTO findOrderById(int orderId){
         for (OrderDTO orderDTO : orders) {
             if (orderDTO.getOrderID() == orderId) {
@@ -60,5 +66,20 @@ public class OrderRegistry {
         return null;
         
     }
+
+    public void replaceOrderById(int orderId, OrderDTO order) {
+       int index = 0;
+
+        for (OrderDTO orderDTO : orders) {
+            if (orderDTO.getOrderID() == orderId) {
+                orders.set(index, order);
+                break;
+            }
+
+            index++;
+        }
+    }
+
+
 
 }

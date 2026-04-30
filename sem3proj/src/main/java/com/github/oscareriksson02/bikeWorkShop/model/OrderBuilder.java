@@ -69,7 +69,10 @@ public class OrderBuilder {
         }
 
         // Add the rest of the fields the same way...
-
+        /**
+         * Returns an OrderDTO object with updated fields
+         * @return
+         */
         public OrderDTO build() {
             return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
                 totalCost, state, repairTasks, estimatedTimeOfCompletion);
