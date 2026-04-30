@@ -15,6 +15,7 @@ public class OrderBuilder {
     private int totalCost;
     private String state;
     private List<RepairTaskDTO> repairTasks;
+    private String diagnosticReport;
     private String estimatedTimeOfCompletion;
 
 
@@ -26,6 +27,7 @@ public class OrderBuilder {
         this.totalCost = builder.totalCost;
         this.state = builder.state;
         this.repairTasks = builder.repairTasks;
+        this.diagnosticReport = builder.diagnosticReport;
         this.estimatedTimeOfCompletion = builder.estimatedTimeOfCompletion;
     }
 
@@ -38,6 +40,7 @@ public class OrderBuilder {
         private int totalCost;
         private String state;
         private List<RepairTaskDTO> repairTasks;
+        private String diagnosticReport;
         private String estimatedTimeOfCompletion;
 
         // Initialize builder from DTO
@@ -49,12 +52,19 @@ public class OrderBuilder {
             this.totalCost = dto.getTotalCost();
             this.state = dto.getState();
             this.repairTasks = dto.getRepairTasks();
+            this.diagnosticReport = dto.getDiagnosticReport();
             this.estimatedTimeOfCompletion = dto.getEstimatedTimeOfCompletion();
         }
 
         // One method per field you might want to override
         public Builder state(String state) {
             this.state = state;
+            return this;
+        }
+
+        public Builder diagnosticReport(String diagnosticReport) {
+            this.diagnosticReport = diagnosticReport;
+            state("Ready for approval");
             return this;
         }
 
@@ -86,7 +96,7 @@ public class OrderBuilder {
          */
         public OrderDTO build() {
             return new OrderDTO(orderID,dateOfCreation, customerDTO, problemDescription, 
-                totalCost, state, repairTasks, estimatedTimeOfCompletion);
+                totalCost, state, repairTasks, diagnosticReport, estimatedTimeOfCompletion);
         }
 
         /**
@@ -112,6 +122,7 @@ public class OrderBuilder {
            "\nCustomer: " + customerDTO +
            "\nProblem Description: " + problemDescription +
            ", State: " + state +
+           ", Diagnostic Report: " + diagnosticReport +
            "\nRepair Tasks: " + repairTasks +
            ", Total Cost: " + totalCost +
            ", ETA: " + estimatedTimeOfCompletion;

@@ -37,6 +37,15 @@ public class Order {
         
     }
 
+    public void addDiagnosticReport(String diagnosticReport) {
+        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
+        .diagnosticReport(diagnosticReport)
+        .build();
+
+        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
+
+    }
+
     /**
      * Function replaces orderDTO in registry with updatedDTO
      * It also change the reference in the order oobject to the updated one

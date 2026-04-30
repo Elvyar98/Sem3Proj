@@ -15,6 +15,7 @@ public class OrderDTO {
     private int totalCost;
     private String state;
     private List<RepairTaskDTO> repairTasks;
+    private String diagnosticReport;
     private String estimatedTimeOfCompletion;
 
     /**
@@ -32,6 +33,7 @@ public class OrderDTO {
         this.totalCost = 0;
         this.state =  "Newly Created";
         this.repairTasks = new ArrayList<>();
+        this.diagnosticReport = " ";
         this.estimatedTimeOfCompletion = " ";
 }
 
@@ -48,7 +50,7 @@ public class OrderDTO {
  */
 
 public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
- String problemDescription, int totalCost, String state, List<RepairTaskDTO> repairTasks, String estimatedTimeOfCompletion) {
+ String problemDescription, int totalCost, String state, List<RepairTaskDTO> repairTasks, String diagnosticReport,String estimatedTimeOfCompletion) {
         this.orderID = orderID;
         this.dateOfCreation = dateOfCreation;
         this.customerDTO = customerDTO;
@@ -56,6 +58,7 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
         this.totalCost = totalCost;
         this.state =  state;
         this.repairTasks = repairTasks;
+        this.diagnosticReport = diagnosticReport;
         this.estimatedTimeOfCompletion = estimatedTimeOfCompletion;
 }
 
@@ -102,6 +105,10 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
         return repairTasks;
     }
 
+    public String getDiagnosticReport() {
+        return diagnosticReport;
+    }
+    
     public String getEstimatedTimeOfCompletion() {
         return estimatedTimeOfCompletion;
     }

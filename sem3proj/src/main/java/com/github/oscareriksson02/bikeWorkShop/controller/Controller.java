@@ -73,5 +73,13 @@ public class Controller {
         order.addRepairTask(repairTaskDescription, cost);
     }
 
+    public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
+        Order order = new Order(orderId, orderRegistry);
+        order.addDiagnosticReport(diagnosticReport);
+        order.addEstimatedTimeOfCompletion(estimatedTimeOfCompletion);
+        
+
+    }
+
 
 }
