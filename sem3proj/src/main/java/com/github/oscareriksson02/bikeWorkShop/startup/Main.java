@@ -1,8 +1,14 @@
 package com.github.oscareriksson02.bikeWorkShop.startup;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
+import com.github.oscareriksson02.bikeWorkShop.model.OrderBuilder;
+
+import java.util.List;
+
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.view.View;
+import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
+import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
 
  /**
@@ -25,5 +31,19 @@ public class Main {
         view.printOrdersByState("Newly Created");
         view.addRepairTask(1, "Byt däcktub", 400);
 
+        OrderRegistry orderRegistry = creator.getOrderRegistry();
+        System.out.println("Test Order builder: ");
+        List<OrderDTO> orders = orderRegistry.findOrdersByState("Newly Created"); 
+        OrderDTO originalDTO = orders.get(0); // End detta och raden ovan sen detta är ett litet hack
+
+
+        System.out.println("Original: " + originalDTO);
+
+        // 3. Bygg en ny OrderBuilder med ett ändrat värde
+        OrderBuilder updatedOrder = new OrderBuilder.Builder(originalDTO)
+        .state("In Progress")
+        .build();
+
+        System.out.println("Updated: " + updatedOrder);
     }
 }

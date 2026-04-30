@@ -37,8 +37,11 @@ public class Order {
 
         return totalCost;
     }
-
-
+    /* Commmenterade ut detta så jag kan compilera koden, försök att alltid skicka compilerbar kod :P 
+    public void acceptRepairOrder() {
+        this.state = "Order Accepted";
+    }
+    */
 
 
 }
