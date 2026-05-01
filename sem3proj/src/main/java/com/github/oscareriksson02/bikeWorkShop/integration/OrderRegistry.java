@@ -16,9 +16,6 @@ public class OrderRegistry {
     private int counter;
 
 
-    private int generateOrderId() {
-        return counter + 1;
-    }
 
     public OrderRegistry() {
        cusReg = new CustomerRegistry();
@@ -81,6 +78,11 @@ public class OrderRegistry {
             index++;
         }
     }
+
+     private int generateOrderId() {
+        return counter + 1;
+    }
+
 
 
 

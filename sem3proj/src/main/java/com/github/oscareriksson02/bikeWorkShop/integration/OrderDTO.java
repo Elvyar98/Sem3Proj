@@ -117,18 +117,7 @@ public OrderDTO(int orderID, LocalDate dateOfCreation, CustomerDTO customerDTO,
 
     public int getTotalCost() {
         return totalCost;
-    }
-
-    /**
-     * Add repair task to repairTasks list
-     * @param repairTask
-     */
-
-    public void addRepairTask(RepairTaskDTO repairTask) {
-        repairTasks.add(repairTask);
-    }
-
-    
+    }   
 
 
 }
