@@ -66,6 +66,12 @@ public class OrderRegistry {
         
     }
 
+    /**
+     * Function 
+     * @param orderId
+     * @param order
+     */
+
     public void replaceOrderById(int orderId, OrderDTO order) {
        int index = 0;
 
