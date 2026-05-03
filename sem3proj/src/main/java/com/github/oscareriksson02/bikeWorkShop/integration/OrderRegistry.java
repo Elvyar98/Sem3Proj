@@ -15,15 +15,17 @@ public class OrderRegistry {
     private CustomerRegistry cusReg;
     private int counter;
 
-
-
     public OrderRegistry() {
        cusReg = new CustomerRegistry();
        orders = new ArrayList<>();
        counter = 0;
     }
 
-
+    /**
+     * Returns all ordersDTO:s in order registry with matching state value as list.
+     * @param state State of oreder completion
+     * @return List of matching order DTO:s
+     */
     public List<OrderDTO> findOrdersByState(OrderState state) {
 
         List<OrderDTO> orderStateMatches = new ArrayList<>();
@@ -36,6 +38,12 @@ public class OrderRegistry {
         return orderStateMatches;
     }
 
+    /**
+     * Creates new repair order and adds it to the list of orders.
+     * @param phoneNumber
+     * @param problemDescription
+     * @return
+     */
     public int createNewRepairOrder(String phoneNumber, String problemDescription) {
         int orderID = generateOrderId();
 
@@ -53,7 +61,6 @@ public class OrderRegistry {
      * @param orderId
      * @return
      */
-
     public OrderDTO findOrderById(int orderId){
         for (OrderDTO orderDTO : orders) {
             if (orderDTO.getOrderID() == orderId) {
@@ -67,11 +74,10 @@ public class OrderRegistry {
     }
 
     /**
-     * Function 
-     * @param orderId
-     * @param order
+     * Replaces a existing order of specified orderid in the list with a given order
+     * @param orderId id of order to be replaced
+     * @param order the new order
      */
-
     public void replaceOrderById(int orderId, OrderDTO order) {
        int index = 0;
 
@@ -88,8 +94,4 @@ public class OrderRegistry {
      private int generateOrderId() {
         return counter + 1;
     }
-
-
-
-
 }
