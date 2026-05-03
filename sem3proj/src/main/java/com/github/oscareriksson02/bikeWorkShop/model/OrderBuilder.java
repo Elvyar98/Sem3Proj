@@ -7,6 +7,11 @@ import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 
+/**
+ * The class represents a repair order.
+ * The nested class Builder is used to construct orders derivateve of a pre existing
+ * orderDTO but overriding specific fields.
+ */
 public class OrderBuilder {
     private int orderID;
     private LocalDate dateOfCreation;
@@ -17,7 +22,6 @@ public class OrderBuilder {
     private List<RepairTaskDTO> repairTasks;
     private String diagnosticReport;
     private String estimatedTimeOfCompletion;
-
 
     private OrderBuilder(Builder builder) {
         this.orderID = builder.orderID;
@@ -31,8 +35,10 @@ public class OrderBuilder {
         this.estimatedTimeOfCompletion = builder.estimatedTimeOfCompletion;
     }
 
+    /**
+     * Creates OrderDTO based on existing OrderDTO with option to override fields before building.
+     */
     public static class Builder {
-        // Copy all fields from DTO as defaults
         private int orderID;
         private LocalDate dateOfCreation;
         private CustomerDTO customerDTO;
@@ -43,7 +49,10 @@ public class OrderBuilder {
         private String diagnosticReport;
         private String estimatedTimeOfCompletion;
 
-        // Initialize builder from DTO
+        /**
+         * Initialize builder buy copying all fields from given OrderDTO
+         * @param dto source DTO 
+         */
         public Builder(OrderDTO dto) {
             this.orderID = dto.getOrderID();
             this.dateOfCreation = dto.getDateOfCreation();
@@ -56,18 +65,36 @@ public class OrderBuilder {
             this.estimatedTimeOfCompletion = dto.getEstimatedTimeOfCompletion();
         }
 
-        // One method per field you might want to override
+        /**
+         * Overrides the state of the order.
+         *
+         * @param state the new OrderState.
+         * @return this builder.
+         */
         public Builder state(OrderState state) {
             this.state = state;
             return this;
         }
 
+        /**
+         * Sets the diagnostic report and automatically transitions
+         * the order state to READY_FOR_APPROVAL.
+         *
+         * @param diagnosticReport the diagnostic report text.
+         * @return this builder.
+         */
         public Builder diagnosticReport(String diagnosticReport) {
             this.diagnosticReport = diagnosticReport;
             state(OrderState.READY_FOR_APPROVAL);
             return this;
         }
 
+        /**
+         * Overrides the total cost of the order.
+         *
+         * @param totalCost the new total cost in SEK.
+         * @return this builder.
+         */
         public Builder totalCost(int totalCost) {
             this.totalCost = totalCost;
             return this;
@@ -84,12 +111,17 @@ public class OrderBuilder {
             return this;
         }
 
+        /**
+         * Overrides the estimated time of completion.
+         *
+         * @param eta the estimated completion date as a string (e.g. "2026-05-20").
+         * @return this builder.
+         */
         public Builder estimatedTimeOfCompletion(String eta) {
             this.estimatedTimeOfCompletion = eta;
             return this;
         }
 
-        // Add the rest of the fields the same way...
         /**
          * Returns an OrderDTO object with updated fields
          * @return
@@ -110,11 +142,14 @@ public class OrderBuilder {
             }
 
             return updatedCost;
+        }
     }
 
-        
-    }
-
+    /**
+     * Returns a string representation of the order, including all fields.
+     *
+     * @return a formatted string with order details.
+     */
     @Override
     public String toString() {
     return "OrderID: " + orderID + 
