@@ -4,11 +4,14 @@ import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerRegistry;
+import com.github.oscareriksson02.bikeWorkShop.integration.DatabaseFailureException;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
+import com.github.oscareriksson02.bikeWorkShop.model.CustomerNotFoundException;
 import com.github.oscareriksson02.bikeWorkShop.model.Order;
 import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
+import com.github.oscareriksson02.bikeWorkShop.model.SystemFailureException;
 
 import java.util.List;
 
@@ -38,10 +41,23 @@ public class Controller {
     /**
      * Returns customer with given number from customerRegistry.
      */
-    public CustomerDTO searchCustomer(String number)
+    public CustomerDTO searchCustomer(String number) throws CustomerNotFoundException
     {
-        return customerRegistry.searchCustomer(number);
+        try {
+            CustomerDTO cust = customerRegistry.searchCustomer(number);
+
+            if (cust != null) {
+                return cust;
+            } else {
+                throw new CustomerNotFoundException(number, "Customer does not exist");
+            }
+
+        }
+        catch (DatabaseFailureException e){
+            throw new SystemFailureException("System failure\nContact Support", e);
+        }
     }
+
 
     /**
      * Returns orderId from newly created repairOrder
