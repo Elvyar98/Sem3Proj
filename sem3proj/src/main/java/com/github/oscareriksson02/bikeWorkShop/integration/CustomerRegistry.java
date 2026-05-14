@@ -24,10 +24,16 @@ public class CustomerRegistry {
 
     /**
      * This methood returns CustomerDTO with the given number. if none is found it returns null.
+     * Throws a DatabaseFailureException when "1234567" is searched
      * @param number
      * @return customerDTO
      */
     public CustomerDTO searchCustomer(String number) {
+        if (number.equals("1234567")){
+            throw new DatabaseFailureException("Unable to reach database server");
+        }
+
+
         for (CustomerDTO customerDTO : customers) {
             if(customerDTO.getPhoneNumber().equals(number))
                 return customerDTO;
