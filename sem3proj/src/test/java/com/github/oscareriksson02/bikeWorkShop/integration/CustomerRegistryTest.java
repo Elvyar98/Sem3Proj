@@ -3,6 +3,7 @@ package com.github.oscareriksson02.bikeWorkShop.integration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerRegistryTest {
@@ -36,13 +37,16 @@ class CustomerRegistryTest {
     }
 
     @Test
-    void searchCustomer_nullInput_doesNotThrow() {
-        assertDoesNotThrow(() -> customerRegistry.searchCustomer(null));
-    }
-
-    @Test
     void searchCustomer_partialPhoneNumber_returnsNull() {
         CustomerDTO result = customerRegistry.searchCustomer("070123");
         assertNull(result, "A partial phone number should not match");
     }
+
+    @Test
+    void searchCustomer_hardCodedDatabaseFailure() {
+        DatabaseFailureException e = assertThrows(DatabaseFailureException.class, 
+    () -> customerRegistry.searchCustomer("1234567"));
+        assertEquals("Unable to reach database server", e.getMessage());
+    }
 }
+

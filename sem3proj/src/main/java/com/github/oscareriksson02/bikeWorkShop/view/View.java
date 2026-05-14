@@ -29,7 +29,7 @@ public class View {
         try {
             System.out.println(contr.searchCustomer(number));
         } catch (CustomerNotFoundException | SystemFailureException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
        
     }

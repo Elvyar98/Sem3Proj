@@ -1,0 +1,5 @@
+com.github.oscareriksson02.bikeWorkShop.integration.DatabaseFailureException: Unable to reach database server
+	at com.github.oscareriksson02.bikeWorkShop.integration.CustomerRegistry.searchCustomer(CustomerRegistry.java:33)
+	at com.github.oscareriksson02.bikeWorkShop.controller.Controller.searchCustomer(Controller.java:53)
+	at com.github.oscareriksson02.bikeWorkShop.view.View.searchCustomer(View.java:30)
+	at com.github.oscareriksson02.bikeWorkShop.startup.Main.main(Main.java:26)

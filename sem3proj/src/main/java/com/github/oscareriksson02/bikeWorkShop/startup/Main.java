@@ -25,7 +25,7 @@ public class Main {
 
         view.searchCustomer("0701234567");
 
-        view.createRepairOrder("0701234567", "Punkterat bakdäck och en gnällig kedja");
+       view.createRepairOrder("0701234567", "Punkterat bakdäck och en gnällig kedja");
 
         view.printOrdersByState(OrderState.NEWLY_CREATED);
 
