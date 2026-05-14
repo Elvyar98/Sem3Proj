@@ -5,7 +5,9 @@ import java.util.List;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
+import com.github.oscareriksson02.bikeWorkShop.model.CustomerNotFoundException;
 import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
+import com.github.oscareriksson02.bikeWorkShop.model.SystemFailureException;
 /**
  * This class is responsible for displaying the user interface for the customer.
  * It will be used by the controller to display the user interface for the customer.
@@ -24,13 +26,12 @@ public class View {
      */
     public void searchCustomer(String number)
     {
-        CustomerDTO cust = contr.searchCustomer(number);
-        if (cust != null) {
-            System.out.println(cust);
+        try {
+            System.out.println(contr.searchCustomer(number));
+        } catch (CustomerNotFoundException | SystemFailureException e){
+            System.out.println(e);
         }
-        else {
-            System.out.println("Customer doesn't exist");
-        }
+       
     }
 
     /**

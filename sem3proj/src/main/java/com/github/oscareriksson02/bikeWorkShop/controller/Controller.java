@@ -40,6 +40,8 @@ public class Controller {
 
     /**
      * Returns customer with given number from customerRegistry.
+     * @param number
+     * @throws CustomerNotFoundException
      */
     public CustomerDTO searchCustomer(String number) throws CustomerNotFoundException
     {
