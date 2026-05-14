@@ -12,6 +12,7 @@ import com.github.oscareriksson02.bikeWorkShop.model.CustomerNotFoundException;
 import com.github.oscareriksson02.bikeWorkShop.model.Order;
 import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import com.github.oscareriksson02.bikeWorkShop.model.SystemFailureException;
+import com.github.oscareriksson02.bikeWorkShop.integration.FileLogger;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Controller {
     private CustomerRegistry customerRegistry;
     private OrderRegistry orderRegistry;
     private Printer printer;
+    private FileLogger fileLogger;
     
     
 
@@ -30,11 +32,13 @@ public class Controller {
      * This is the constructor for the Controller class. It takes a RegistryCreator and a Printer as parameters and initializes the customerRegistry, orderRegistry and printer fields.
      * @param creator
      * @param printer
+     * @param fileLogger
      */
-    public Controller(RegistryCreator creator, Printer printer) {
+    public Controller(RegistryCreator creator, Printer printer, FileLogger fileLogger) {
         this.customerRegistry = creator.getCustomerRegistry();
         this.orderRegistry = creator.getOrderRegistry();
         this.printer = printer;
+        this.fileLogger = fileLogger;
     }
 
 
@@ -56,6 +60,7 @@ public class Controller {
 
         }
         catch (DatabaseFailureException e){
+            fileLogger.log(e);
             throw new SystemFailureException("System failure\nContact Support", e);
         }
     }

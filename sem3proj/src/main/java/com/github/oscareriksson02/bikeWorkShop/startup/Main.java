@@ -5,6 +5,7 @@ import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.view.View;
 import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
+import com.github.oscareriksson02.bikeWorkShop.integration.FileLogger;
 
  /**
      * This is the main class of the application. 
@@ -18,7 +19,8 @@ public class Main {
     public static void main(String[] args) {
         RegistryCreator creator = new RegistryCreator();
         Printer printer = new Printer();
-        Controller contr = new Controller(creator, printer);
+        FileLogger filelogger = new FileLogger();
+        Controller contr = new Controller(creator, printer, filelogger);
         View view = new View(contr);
 
         view.searchCustomer("0701234567");
