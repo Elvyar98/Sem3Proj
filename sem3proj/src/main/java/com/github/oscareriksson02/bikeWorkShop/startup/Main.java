@@ -2,7 +2,6 @@ package com.github.oscareriksson02.bikeWorkShop.startup;
 
 import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
 import com.github.oscareriksson02.bikeWorkShop.integration.RepairOrderLogger;
-import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
 import com.github.oscareriksson02.bikeWorkShop.view.RepairOrderView;
 import com.github.oscareriksson02.bikeWorkShop.view.View;
@@ -28,21 +27,8 @@ public class Main {
         RepairOrderLogger repairOrderLogger = new RepairOrderLogger();
         contr.addObserver(repairOrderLogger);
         contr.addObserver(repairOrderView);
+        view.run();
 
-        view.searchCustomer("0701234567");
-
-       view.createRepairOrder("0701234567", "Punkterat bakdäck och en gnällig kedja");
-
-        view.printOrdersByState(OrderState.NEWLY_CREATED);
-
-        view.addRepairTask(1, "Byt däcktub", 400);
-        view.addRepairTask(1, "Byt kedja", 450);
-        view.addRepairTask(1, "Smörj kedja", 100);
-
-        view.addDiagnosticReport(1, "Vi kommer ta alla dina pengar", "2026-09-30");
-
-        //view.rejectRepairOrder(1);
-        view.acceptRepairOrder(1);
 
        
     }
