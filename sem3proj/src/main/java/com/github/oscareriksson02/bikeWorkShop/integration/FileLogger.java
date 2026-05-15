@@ -31,4 +31,8 @@ public class FileLogger {
     public void log(Throwable message) {
        message.printStackTrace(logStream);
     }
+
+    public void log(String message) {
+        logStream.print(message);
+    }
 }
