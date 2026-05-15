@@ -44,7 +44,7 @@ public class CustomerRegistry {
         }
 
         return instance;
-    }
+    } 
 
      /**
      * Method specifically for ressetting instance for tests
