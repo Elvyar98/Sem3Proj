@@ -23,14 +23,16 @@ public class View {
      * Searches customer via number and prints out full details
      * @param number
      */
-    public void searchCustomer(String number)
-    {
+   public void searchCustomer(String number) {
         try {
+            System.out.println("\n========== CUSTOMER DETAILS ==========");
             System.out.println(contr.searchCustomer(number));
-        } catch (CustomerNotFoundException | SystemFailureException e){
+            System.out.println("======================================");
+        } catch (CustomerNotFoundException | SystemFailureException e) {
+            System.out.println("\n========== ERROR ==========");
             System.out.println(e.getMessage());
+            System.out.println("===========================");
         }
-       
     }
 
     /**

@@ -23,7 +23,7 @@ public class BikeDTO {
 
     @Override
     public String toString() {
-    return "Bike Brand: " + bikeBrand + ", Bike Model " + bikeModel + ", Bike Serial Number: " + bikeSerialNumber;
+    return bikeBrand + " " + bikeModel + " (Serial: " + bikeSerialNumber + ")";
     }
 
     /**

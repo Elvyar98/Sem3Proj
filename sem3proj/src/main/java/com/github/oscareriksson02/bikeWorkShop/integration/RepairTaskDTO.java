@@ -23,8 +23,7 @@ public class RepairTaskDTO {
 
     @Override
     public String toString() {
-        return "Problem description: " + problemDescription + ", cost: " + 
-        cost;
+    return problemDescription + " - " + cost + " kr";
     }
 
     public String getProblemDescription() {

@@ -23,7 +23,7 @@ public class AdressDTO {
 
     @Override
     public String toString() {
-    return "Street Adress: " + streetAdress + ", Zip Code " + zipCode + ", City: " + city;
+    return streetAdress + ", " + zipCode + " " + city;
     }
 
     /**

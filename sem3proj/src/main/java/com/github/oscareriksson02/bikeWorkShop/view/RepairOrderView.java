@@ -11,8 +11,10 @@ public class RepairOrderView implements RepairOrderObserver {
 /**
  * Method prints out changed repair order
  */
-   public void onRepairOrderUpdate(OrderDTO repaiOrder) {
-        System.out.print(repaiOrder);
+   public void onRepairOrderUpdate(OrderDTO repairOrder) {
+    System.out.println("\n========== REPAIR ORDER UPDATE ==========");
+    System.out.println(repairOrder);
+    System.out.println("=========================================");
     }
 
 }
