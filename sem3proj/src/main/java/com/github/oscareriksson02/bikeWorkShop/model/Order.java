@@ -81,6 +81,10 @@ public class Order {
         updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
     }
 
+    /**
+     * Updates repaiOrder state to rejected
+     */
+
     public void rejectRepairOrder(){
         OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
         .state(OrderState.REJECTED)
@@ -102,9 +106,18 @@ public class Order {
         notifyObservers();
     }
 
+    /**
+     * Adds observer to Array List
+     * @param observer
+     */
+
     public void addObserver(RepairOrderObserver observer) {
         observers.add(observer);
     }
+
+    /**
+     * Notifys observers about order
+     */
 
     public void notifyObservers() {
         for (RepairOrderObserver observer : observers){

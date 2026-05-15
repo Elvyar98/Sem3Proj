@@ -1,19 +1,10 @@
 package com.github.oscareriksson02.bikeWorkShop.controller;
 
-import com.github.oscareriksson02.bikeWorkShop.integration.RegistryCreator;
-import com.github.oscareriksson02.bikeWorkShop.integration.CustomerDTO;
-import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
-import com.github.oscareriksson02.bikeWorkShop.integration.CustomerRegistry;
-import com.github.oscareriksson02.bikeWorkShop.integration.DatabaseFailureException;
-import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
+import com.github.oscareriksson02.bikeWorkShop.integration.*;
 import com.github.oscareriksson02.bikeWorkShop.controller.Controller;
-import com.github.oscareriksson02.bikeWorkShop.integration.Printer;
-import com.github.oscareriksson02.bikeWorkShop.model.CustomerNotFoundException;
-import com.github.oscareriksson02.bikeWorkShop.model.Order;
-import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
-import com.github.oscareriksson02.bikeWorkShop.model.SystemFailureException;
-import com.github.oscareriksson02.bikeWorkShop.integration.FileLogger;
+import com.github.oscareriksson02.bikeWorkShop.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +16,7 @@ public class Controller {
     private OrderRegistry orderRegistry;
     private Printer printer;
     private FileLogger fileLogger;
-    
+    private List<RepairOrderObserver> observers = new ArrayList<>();
     
 
     /**
@@ -94,6 +85,7 @@ public class Controller {
 
     public void addRepairTask(int orderId, String repairTaskDescription, int cost) {
         Order order = new Order(orderId, orderRegistry);
+        registerObservers(order);
         order.addRepairTask(repairTaskDescription, cost);
     }
 
@@ -106,6 +98,7 @@ public class Controller {
 
     public void addDiagnosticReport(int orderId, String diagnosticReport, String estimatedTimeOfCompletion) {
         Order order = new Order(orderId, orderRegistry);
+        registerObservers(order);
         order.addDiagnosticReport(diagnosticReport);
         order.addEstimatedTimeOfCompletion(estimatedTimeOfCompletion);     
 
@@ -118,6 +111,7 @@ public class Controller {
 
     public void acceptRepairOrder(int orderId) {
         Order order = new Order(orderId, orderRegistry);
+        registerObservers(order);
         order.acceptRepairOrder();
         printOrder(orderId);
 
@@ -129,9 +123,19 @@ public class Controller {
      */
 
     public void rejectRepairOrder(int orderId) {
-         Order order = new Order(orderId, orderRegistry);
+        Order order = new Order(orderId, orderRegistry);
+        registerObservers(order);
         order.rejectRepairOrder();
         printOrder(orderId);
+    }
+
+    /**
+     * Adds observer to Array List
+     * @param observer
+     */
+
+      public void addObserver(RepairOrderObserver observer) {
+        observers.add(observer);
     }
 
     /*
@@ -142,5 +146,16 @@ public class Controller {
         OrderDTO orderDTO = orderRegistry.findOrderById(orderId);
         printer.printOrder(orderDTO);        
     }
+
+    /**
+     * Registers observers to new order object
+     * @param order
+     */
+    private void registerObservers(Order order) {
+        for (RepairOrderObserver observer : observers){
+            order.addObserver(observer);
+        }
+    }
+  
 
 }
