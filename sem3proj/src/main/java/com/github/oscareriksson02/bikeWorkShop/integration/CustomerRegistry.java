@@ -15,11 +15,21 @@ public class CustomerRegistry {
      * 
      */
     private CustomerRegistry() {
-        BikeDTO cykel = new BikeDTO("Centurion", "Super Le Mans", "1983");
-        AdressDTO adress = new AdressDTO("Hittepåvägen 34", "12345", "Stockholm");
-        CustomerDTO kalle = new CustomerDTO("1", "Kalle Jansson", "kalle@jansson", "0701234567", cykel, adress);
+        BikeDTO cykel1 = new BikeDTO("Centurion", "Super Le Mans", "1983");
+        AdressDTO adress1 = new AdressDTO("Hittepåvägen 34", "12345", "Stockholm");
+        CustomerDTO kalle = new CustomerDTO("1", "Kalle Jansson", "kalle@jansson", "0701234567", cykel1, adress1);
+
+        BikeDTO cykel2 = new BikeDTO("Trek", "FX3", "2021");
+        AdressDTO adress2 = new AdressDTO("Storgatan 12", "54321", "Göteborg");
+        CustomerDTO lisa = new CustomerDTO("2", "Lisa Svensson", "lisa@svensson", "0709876543", cykel2, adress2);
+
+        BikeDTO cykel3 = new BikeDTO("Giant", "Escape 3", "2019");
+        AdressDTO adress3 = new AdressDTO("Lillgatan 5", "67890", "Malmö");
+        CustomerDTO erik = new CustomerDTO("3", "Erik Lindqvist", "erik@lindqvist", "0731234567", cykel3, adress3);
 
         customers.add(kalle);
+        customers.add(lisa);
+        customers.add(erik);
     }
 
       /**
