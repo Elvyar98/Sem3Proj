@@ -8,8 +8,8 @@ public class RegistryCreator {
     public RegistryCreator() {
     }
     
-    private CustomerRegistry customerRegistry = new CustomerRegistry();
-    private OrderRegistry orderRegistry = new OrderRegistry();
+    private CustomerRegistry customerRegistry = CustomerRegistry.getInstance();
+    private OrderRegistry orderRegistry = OrderRegistry.getInstance();
 
     public CustomerRegistry getCustomerRegistry() {
         return customerRegistry;

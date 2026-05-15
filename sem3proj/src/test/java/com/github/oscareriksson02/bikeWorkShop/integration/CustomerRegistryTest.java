@@ -12,7 +12,7 @@ class CustomerRegistryTest {
 
     @BeforeEach
     void setUp() {
-        customerRegistry = new CustomerRegistry();
+        customerRegistry = CustomerRegistry.getInstance();
     }
 
     @Test

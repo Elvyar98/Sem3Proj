@@ -14,11 +14,36 @@ public class OrderRegistry {
     private List<OrderDTO> orders;
     private CustomerRegistry cusReg;
     private int counter;
+    private static OrderRegistry instance;
+    
+    /**
+     * Constructor for the order class
+     */
 
-    public OrderRegistry() {
-       cusReg = new CustomerRegistry();
+    private OrderRegistry() {
+       cusReg =  CustomerRegistry.getInstance();
        orders = new ArrayList<>();
        counter = 0;
+    }
+
+    /**
+     * Return an instance of the OrderRegistry.
+     * If instance == null it creates a new one.
+     * @return instance
+     */
+
+    public static OrderRegistry getInstance() {
+        if (instance == null) {
+            instance = new OrderRegistry();
+        }
+        return instance;
+    }
+
+    /**
+     * Method specifically for ressetting instance for tests
+     */
+    static void resetInstance() {
+        instance = null;
     }
 
     /**
