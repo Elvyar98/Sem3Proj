@@ -49,7 +49,7 @@ public class CustomerRegistry {
      /**
      * Method specifically for ressetting instance for tests
      */
-    static void resetInstance() {
+    public static void resetInstance() {
         instance = null;
     }
     

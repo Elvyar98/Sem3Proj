@@ -112,7 +112,12 @@ public class Controller {
     public void acceptRepairOrder(int orderId) {
         Order order = new Order(orderId, orderRegistry);
         registerObservers(order);
-        order.acceptRepairOrder();
+
+        String phoneNumeber = getCustomerPhoneNumer(orderId);
+        LoyaltyDiscount loyaltyDiscount = new LoyaltyDiscount(phoneNumeber, orderRegistry);
+
+
+        order.acceptRepairOrder(loyaltyDiscount);
         printOrder(orderId);
 
     }
@@ -155,6 +160,18 @@ public class Controller {
         for (RepairOrderObserver observer : observers){
             order.addObserver(observer);
         }
+    }
+
+
+    /**
+     * Gets customers phone nummber
+     * @param orderid
+     * @return
+     */
+    private String getCustomerPhoneNumer(int orderid) {
+        OrderDTO order = orderRegistry.findOrderById(orderid);
+        CustomerDTO cust = order.getCustomerDTO();
+        return cust.getPhoneNumber();
     }
   
 

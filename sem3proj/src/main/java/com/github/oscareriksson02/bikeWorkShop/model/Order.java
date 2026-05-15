@@ -42,6 +42,10 @@ public class Order {
         
     }
 
+    public int getTotalCost() {
+        return orderDTO.getTotalCost();
+    }
+
     /**
      * Function adds a diagnostic report to an existing orderDTO by creating a new
      * one and replacing the one in order registry with it. 
@@ -72,13 +76,15 @@ public class Order {
 
     /**
      * Updates orderstate to ACCEPTED by creating a new DTO and replacing the old one in order registry
+     * Applys discount to total cost every third repair. 
      */
-    public void acceptRepairOrder(){
-        OrderDTO updateOrderDTO = new OrderBuilder.Builder(orderDTO)
-        .state(OrderState.ACCEPTED)
-        .build();
-
-        updateOrderDTO(orderDTO.getOrderID(), updateOrderDTO);
+    public void acceptRepairOrder(DiscountStrategy discountStrategy) {
+        int discountedCost = discountStrategy.applyDiscount(orderDTO.getTotalCost());
+        OrderDTO updatedOrderDTO = new OrderBuilder.Builder(orderDTO)
+            .totalCost(discountedCost)
+            .state(OrderState.ACCEPTED)
+            .build();
+        updateOrderDTO(orderDTO.getOrderID(), updatedOrderDTO);
     }
 
     /**
