@@ -9,6 +9,6 @@ public RepairOrderLogger() {
 }
 
 public void onRepairOrderUpdate(OrderDTO repairOrder) {
-    fileLogger.log(repairOrder);
+    fileLogger.log(repairOrder.toString());
 }
 }
