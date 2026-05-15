@@ -1,5 +1,8 @@
 package com.github.oscareriksson02.bikeWorkShop.model;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderDTO;
 import com.github.oscareriksson02.bikeWorkShop.integration.OrderRegistry;
 import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
@@ -96,6 +99,17 @@ public class Order {
     private void updateOrderDTO(int orderId, OrderDTO orderDTO) {
         orderRegistry.replaceOrderById(orderId, orderDTO);
         this.orderDTO = orderDTO;
+        notifyObservers();
+    }
+
+    public void addObserver(RepairOrderObserver observer) {
+        observers.add(observer);
+    }
+
+    public void notifyObservers() {
+        for (RepairOrderObserver observer : observers){
+            observer.onRepairOrderUpdate(orderDTO);
+        }
     }
     
 
