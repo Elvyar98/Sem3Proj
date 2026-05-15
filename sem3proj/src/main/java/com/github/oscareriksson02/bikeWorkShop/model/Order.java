@@ -7,6 +7,7 @@ import com.github.oscareriksson02.bikeWorkShop.integration.RepairTaskDTO;
 public class Order {
    private OrderDTO orderDTO;
    private OrderRegistry orderRegistry;
+   private List<RepairOrderObserver> observers = new ArrayList<>();
    
 
   

@@ -1,0 +1,3 @@
+Good — so every update goes through updateOrderDTO at the end. That's your natural notification point.
+Every time updateOrderDTO is called, an updated OrderDTO exists. That's exactly when observers should be notified.
+So the observable is the Order class, and updateOrderDTO is where you call notifyObservers.
