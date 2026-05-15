@@ -5,72 +5,32 @@ import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-// StubCustomerRegistry replaces dependancy 
-// BeforeEach setUp() resets state before each test 
-// Helper funtions minimize code repetition
-
 class OrderRegistryTest {
-
-    // -----------------------------------------------------------------------
-    // Stub – replaces the real CustomerRegistry
-    // -----------------------------------------------------------------------
-
-    private static class StubCustomerRegistry extends CustomerRegistry {
-        private final CustomerDTO customerToReturn;
-
-        StubCustomerRegistry(CustomerDTO customer) {
-            this.customerToReturn = customer;
-        }
-
-        @Override
-        public CustomerDTO searchCustomer(String phoneNumber) {
-            return customerToReturn;
-        }
-    }
-
-    // -----------------------------------------------------------------------
-    // Test fixtures
-    // -----------------------------------------------------------------------
-
-    private OrderRegistry orderRegistry;
-    private CustomerDTO testCustomer;
 
     private static final String PHONE_A       = "0701234567";
     private static final String PHONE_B       = "0709876543";
+    private static final String PHONE_C       = "0731234567";
     private static final String DESCRIPTION_A = "Flat tire";
     private static final String DESCRIPTION_B = "Broken brake";
+    private static final String DESCRIPTION_C = "Battery issue";
+
+    private OrderRegistry orderRegistry;
 
     @BeforeEach
-    void setUp() throws Exception {
-        orderRegistry = new OrderRegistry();
-
-        testCustomer = new CustomerDTO(
-            "C001", "Test Person", "test@test.com", PHONE_A, null, null
-        );
-
-        Field cusRegField = OrderRegistry.class.getDeclaredField("cusReg");
-        cusRegField.setAccessible(true);
-        cusRegField.set(orderRegistry, new StubCustomerRegistry(testCustomer));
+    void setUp() {
+        CustomerRegistry.resetInstance();
+        OrderRegistry.resetInstance();
+        orderRegistry = OrderRegistry.getInstance();
     }
-
-    // -----------------------------------------------------------------------
-    // Helpers
-    // -----------------------------------------------------------------------
 
     private int createOrder(String phone, String description) {
         return orderRegistry.createNewRepairOrder(phone, description);
     }
 
-    /**
-     * Transitions an existing order to a new state using OrderBuilder.
-     * Only the state field changes – all other fields are copied from the original.
-     */
     private void transitionState(int orderId, OrderState newState) {
         OrderDTO original = orderRegistry.findOrderById(orderId);
         OrderDTO updated = new OrderBuilder.Builder(original)
@@ -79,23 +39,17 @@ class OrderRegistryTest {
         orderRegistry.replaceOrderById(orderId, updated);
     }
 
-    // -----------------------------------------------------------------------
-    // createNewRepairOrder
-    // -----------------------------------------------------------------------
-
     @Test
     void firstOrderReceivesIdOne() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
-        assertEquals(1, id,
-            "The first order created should be assigned ID 1.");
+        assertEquals(1, id, "The first order created should be assigned ID 1.");
     }
 
     @Test
     void secondOrderReceivesIdTwo() {
         createOrder(PHONE_A, DESCRIPTION_A);
         int id = createOrder(PHONE_B, DESCRIPTION_B);
-        assertEquals(2, id,
-            "The second order created should be assigned ID 2.");
+        assertEquals(2, id, "The second order created should be assigned ID 2.");
     }
 
     @Test
@@ -119,16 +73,11 @@ class OrderRegistryTest {
             "The stored order must contain the problem description that was supplied.");
     }
 
-    // -----------------------------------------------------------------------
-    // findOrderById
-    // -----------------------------------------------------------------------
-
     @Test
     void findOrderById_existingId_returnsOrderWithCorrectId() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         OrderDTO result = orderRegistry.findOrderById(id);
-        assertNotNull(result,
-            "findOrderById should return a non-null DTO for an existing ID.");
+        assertNotNull(result, "findOrderById should return a non-null DTO for an existing ID.");
         assertEquals(id, result.getOrderID(),
             "The returned DTO must carry the same ID that was searched for.");
     }
@@ -136,30 +85,22 @@ class OrderRegistryTest {
     @Test
     void findOrderById_nonExistentId_returnsNull() {
         OrderDTO result = orderRegistry.findOrderById(999);
-        assertNull(result,
-            "findOrderById should return null when the ID does not exist in the registry.");
+        assertNull(result, "findOrderById should return null when the ID does not exist.");
     }
 
     @Test
     void findOrderById_afterMultipleCreations_returnsCorrectOrder() {
         int idA = createOrder(PHONE_A, DESCRIPTION_A);
         int idB = createOrder(PHONE_B, DESCRIPTION_B);
-
-        assertEquals(DESCRIPTION_A, orderRegistry.findOrderById(idA).getProblemDescription(),
-            "findOrderById should return order A when queried with A's ID.");
-        assertEquals(DESCRIPTION_B, orderRegistry.findOrderById(idB).getProblemDescription(),
-            "findOrderById should return order B when queried with B's ID.");
+        assertEquals(DESCRIPTION_A, orderRegistry.findOrderById(idA).getProblemDescription());
+        assertEquals(DESCRIPTION_B, orderRegistry.findOrderById(idB).getProblemDescription());
     }
-
-    // -----------------------------------------------------------------------
-    // findOrdersByState
-    // -----------------------------------------------------------------------
 
     @Test
     void findOrdersByState_emptyRegistry_returnsEmptyList() {
         List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.NEWLY_CREATED);
         assertTrue(result.isEmpty(),
-            "findOrdersByState should return an empty list when the registry contains no orders.");
+            "findOrdersByState should return an empty list when registry contains no orders.");
     }
 
     @Test
@@ -167,111 +108,79 @@ class OrderRegistryTest {
         createOrder(PHONE_A, DESCRIPTION_A);
         List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.ACCEPTED);
         assertTrue(result.isEmpty(),
-            "findOrdersByState should return an empty list when no orders have the requested state.");
+            "findOrdersByState should return empty list when no orders match the state.");
     }
 
     @Test
     void findOrdersByState_oneOrderMatchesState_returnsListWithOneElement() {
         createOrder(PHONE_A, DESCRIPTION_A);
         List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.NEWLY_CREATED);
-        assertEquals(1, result.size(),
-            "findOrdersByState should return exactly one element when one order matches.");
+        assertEquals(1, result.size());
     }
 
     @Test
     void findOrdersByState_allOrdersMatchState_returnsAllOrders() {
         createOrder(PHONE_A, DESCRIPTION_A);
         createOrder(PHONE_B, DESCRIPTION_B);
+        createOrder(PHONE_C, DESCRIPTION_C);
         List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.NEWLY_CREATED);
-        assertEquals(2, result.size(),
-            "findOrdersByState should return all orders when every order matches the requested state.");
+        assertEquals(3, result.size());
     }
 
     @Test
     void findOrdersByState_mixedStates_returnsOnlyMatchingOrders() {
         int idA = createOrder(PHONE_A, DESCRIPTION_A);
         createOrder(PHONE_B, DESCRIPTION_B);
-
         transitionState(idA, OrderState.ACCEPTED);
-
-        assertEquals(1, orderRegistry.findOrdersByState(OrderState.NEWLY_CREATED).size(),
-            "There should be exactly one NEWLY_CREATED order after promoting one to ACCEPTED.");
-        assertEquals(1, orderRegistry.findOrdersByState(OrderState.ACCEPTED).size(),
-            "There should be exactly one ACCEPTED order after the state transition.");
+        assertEquals(1, orderRegistry.findOrdersByState(OrderState.NEWLY_CREATED).size());
+        assertEquals(1, orderRegistry.findOrdersByState(OrderState.ACCEPTED).size());
     }
 
     @Test
     void findOrdersByState_rejectedOrder_isReturnedCorrectly() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         transitionState(id, OrderState.REJECTED);
-        List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.REJECTED);
-        assertEquals(1, result.size(),
-            "findOrdersByState should return the order once it has been set to REJECTED.");
+        assertEquals(1, orderRegistry.findOrdersByState(OrderState.REJECTED).size());
     }
 
     @Test
     void findOrdersByState_readyForApprovalOrder_isReturnedCorrectly() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         transitionState(id, OrderState.READY_FOR_APPROVAL);
-        List<OrderDTO> result = orderRegistry.findOrdersByState(OrderState.READY_FOR_APPROVAL);
-        assertEquals(1, result.size(),
-            "findOrdersByState should return the order once it has been set to READY_FOR_APPROVAL.");
+        assertEquals(1, orderRegistry.findOrdersByState(OrderState.READY_FOR_APPROVAL).size());
     }
-
-    // -----------------------------------------------------------------------
-    // replaceOrderById
-    // -----------------------------------------------------------------------
 
     @Test
     void replaceOrderById_existingId_orderIsReplaced() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         OrderDTO original = orderRegistry.findOrderById(id);
-
-        OrderDTO replacement = new OrderBuilder.Builder(original)
-            .state(OrderState.ACCEPTED)
-            .build();
+        OrderDTO replacement = new OrderBuilder.Builder(original).state(OrderState.ACCEPTED).build();
         orderRegistry.replaceOrderById(id, replacement);
-
-        OrderDTO found = orderRegistry.findOrderById(id);
-        assertEquals(OrderState.ACCEPTED, found.getState(),
-            "After replacement the order should carry the new state ACCEPTED.");
+        assertEquals(OrderState.ACCEPTED, orderRegistry.findOrderById(id).getState());
     }
 
     @Test
     void replaceOrderById_nonExistentId_doesNotThrow() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         OrderDTO original = orderRegistry.findOrderById(id);
-
-        OrderDTO ghost = new OrderBuilder.Builder(original)
-            .state(OrderState.ACCEPTED)
-            .build();
-
-        assertDoesNotThrow(() -> orderRegistry.replaceOrderById(999, ghost),
-            "Calling replaceOrderById with a non-existent ID should not throw any exception.");
+        OrderDTO ghost = new OrderBuilder.Builder(original).state(OrderState.ACCEPTED).build();
+        assertDoesNotThrow(() -> orderRegistry.replaceOrderById(999, ghost));
     }
 
     @Test
     void replaceOrderById_nonExistentId_leavesExistingOrderUnchanged() {
         int id = createOrder(PHONE_A, DESCRIPTION_A);
         OrderDTO original = orderRegistry.findOrderById(id);
-
-        OrderDTO ghost = new OrderBuilder.Builder(original)
-            .state(OrderState.ACCEPTED)
-            .build();
+        OrderDTO ghost = new OrderBuilder.Builder(original).state(OrderState.ACCEPTED).build();
         orderRegistry.replaceOrderById(999, ghost);
-
-        assertEquals(OrderState.NEWLY_CREATED, orderRegistry.findOrderById(id).getState(),
-            "An existing order must not be affected when replacing a different, non-existent ID.");
+        assertEquals(OrderState.NEWLY_CREATED, orderRegistry.findOrderById(id).getState());
     }
 
     @Test
     void replaceOrderById_onlyTargetOrderIsReplaced() {
         int idA = createOrder(PHONE_A, DESCRIPTION_A);
         int idB = createOrder(PHONE_B, DESCRIPTION_B);
-
         transitionState(idA, OrderState.REJECTED);
-
-        assertEquals(OrderState.NEWLY_CREATED, orderRegistry.findOrderById(idB).getState(),
-            "Replacing order A must not affect the state of the unrelated order B.");
+        assertEquals(OrderState.NEWLY_CREATED, orderRegistry.findOrderById(idB).getState());
     }
 }

@@ -45,6 +45,14 @@ public class CustomerRegistry {
 
         return instance;
     }
+
+     /**
+     * Method specifically for ressetting instance for tests
+     */
+    static void resetInstance() {
+        instance = null;
+    }
+    
     /**
      * This methood returns CustomerDTO with the given number. if none is found it returns null.
      * Throws a DatabaseFailureException when "1234567" is searched
