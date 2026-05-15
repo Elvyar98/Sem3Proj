@@ -1,0 +1,29 @@
+OrderID: 1, Date Of Creation: 2026-05-15
+Customer: ID: 1, Name: Kalle Jansson, Email: kalle@jansson, Phone: 0701234567
+ Bike Brand: Centurion, Bike Model Super Le Mans, Bike Serial Number: 1983
+Street Adress: Hittepåvägen 34, Zip Code 12345, City: Stockholm
+
+Problem Description: Punkterat bakdäck och en gnällig kedja, State: NEWLY_CREATED, Diagnostic Report:  
+Repair Tasks: [Problem description: Byt däcktub, cost: 400]
+Total Cost: 400, ETC:  OrderID: 1, Date Of Creation: 2026-05-15
+Customer: ID: 1, Name: Kalle Jansson, Email: kalle@jansson, Phone: 0701234567
+ Bike Brand: Centurion, Bike Model Super Le Mans, Bike Serial Number: 1983
+Street Adress: Hittepåvägen 34, Zip Code 12345, City: Stockholm
+
+Problem Description: Punkterat bakdäck och en gnällig kedja, State: NEWLY_CREATED, Diagnostic Report:  
+Repair Tasks: [Problem description: Byt däcktub, cost: 400, Problem description: Byt kedja, cost: 450]
+Total Cost: 850, ETC:  OrderID: 1, Date Of Creation: 2026-05-15
+Customer: ID: 1, Name: Kalle Jansson, Email: kalle@jansson, Phone: 0701234567
+ Bike Brand: Centurion, Bike Model Super Le Mans, Bike Serial Number: 1983
+Street Adress: Hittepåvägen 34, Zip Code 12345, City: Stockholm
+
+Problem Description: Punkterat bakdäck och en gnällig kedja, State: NEWLY_CREATED, Diagnostic Report:  
+Repair Tasks: [Problem description: Byt däcktub, cost: 400, Problem description: Byt kedja, cost: 450, Problem description: Smörj kedja, cost: 100]
+Total Cost: 950, ETC:  OrderID: 1, Date Of Creation: 2026-05-15
+Customer: ID: 1, Name: Kalle Jansson, Email: kalle@jansson, Phone: 0701234567
+ Bike Brand: Centurion, Bike Model Super Le Mans, Bike Serial Number: 1983
+Street Adress: Hittepåvägen 34, Zip Code 12345, City: Stockholm
+
+Problem Description: Punkterat bakdäck och en gnällig kedja, State: READY_FOR_APPROVAL, Diagnostic Report: Vi kommer ta alla dina pengar
+Repair Tasks: [Problem description: Byt däcktub, cost: 400, Problem description: Byt kedja, cost: 450, Problem description: Smörj kedja, cost: 100]
+Total Cost: 950, ETC:  
