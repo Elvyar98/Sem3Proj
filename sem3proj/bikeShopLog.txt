@@ -1,25 +1,25 @@
-Order #1 | 2026-05-15 | State: NEWLY_CREATED
+Order #4 | 2026-05-16 | State: NEWLY_CREATED
 Customer: Name: Kalle Jansson | Phone: 0701234567 | Email: kalle@jansson
 Bike: Centurion Super Le Mans (Serial: 1983)
 Address: Hittepåvägen 34, 12345 Stockholm
 Problem: Punkterat bakdäck och en gnällig kedja
 Diagnostic:  
 Tasks: [Byt däcktub - 400 kr]
-Total: 400 kr | ETC:  Order #1 | 2026-05-15 | State: NEWLY_CREATED
+Total: 400 kr | ETC:  Order #4 | 2026-05-16 | State: NEWLY_CREATED
 Customer: Name: Kalle Jansson | Phone: 0701234567 | Email: kalle@jansson
 Bike: Centurion Super Le Mans (Serial: 1983)
 Address: Hittepåvägen 34, 12345 Stockholm
 Problem: Punkterat bakdäck och en gnällig kedja
 Diagnostic:  
 Tasks: [Byt däcktub - 400 kr, Byt kedja - 450 kr]
-Total: 850 kr | ETC:  Order #1 | 2026-05-15 | State: NEWLY_CREATED
+Total: 850 kr | ETC:  Order #4 | 2026-05-16 | State: NEWLY_CREATED
 Customer: Name: Kalle Jansson | Phone: 0701234567 | Email: kalle@jansson
 Bike: Centurion Super Le Mans (Serial: 1983)
 Address: Hittepåvägen 34, 12345 Stockholm
 Problem: Punkterat bakdäck och en gnällig kedja
 Diagnostic:  
 Tasks: [Byt däcktub - 400 kr, Byt kedja - 450 kr, Smörj kedja - 100 kr]
-Total: 950 kr | ETC:  Order #1 | 2026-05-15 | State: READY_FOR_APPROVAL
+Total: 950 kr | ETC:  Order #4 | 2026-05-16 | State: READY_FOR_APPROVAL
 Customer: Name: Kalle Jansson | Phone: 0701234567 | Email: kalle@jansson
 Bike: Centurion Super Le Mans (Serial: 1983)
 Address: Hittepåvägen 34, 12345 Stockholm

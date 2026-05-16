@@ -3,6 +3,7 @@ package com.github.oscareriksson02.bikeWorkShop.integration;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.oscareriksson02.bikeWorkShop.model.OrderBuilder;
 import com.github.oscareriksson02.bikeWorkShop.model.OrderState;
 
 
@@ -24,6 +25,24 @@ public class OrderRegistry {
        cusReg =  CustomerRegistry.getInstance();
        orders = new ArrayList<>();
        counter = 0;
+
+       // Temporary simulation of 3 previous accepted orders for Kalle
+        CustomerDTO kalle = cusReg.searchCustomer("0701234567");
+
+        OrderDTO order1 = new OrderDTO(generateOrderId(), kalle, "Tidigare reparation 1");
+        order1 = new OrderBuilder.Builder(order1).state(OrderState.ACCEPTED).build();
+        orders.add(order1);
+        counter++;
+
+        OrderDTO order2 = new OrderDTO(generateOrderId(), kalle, "Tidigare reparation 2");
+        order2 = new OrderBuilder.Builder(order2).state(OrderState.ACCEPTED).build();
+        orders.add(order2);
+        counter++;
+
+        OrderDTO order3 = new OrderDTO(generateOrderId(), kalle, "Tidigare reparation 3");
+        order3 = new OrderBuilder.Builder(order3).state(OrderState.ACCEPTED).build();
+        orders.add(order3);
+        counter++;
     }
 
     /**

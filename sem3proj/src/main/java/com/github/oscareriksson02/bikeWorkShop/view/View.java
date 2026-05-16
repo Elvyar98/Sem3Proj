@@ -24,13 +24,13 @@ public class View {
      */
     public void run() {
         if (!searchCustomer("0701234567")) return;
-        createRepairOrder("0701234567", "Punkterat bakdäck och en gnällig kedja");
+        int orderId = createRepairOrder("0701234567", "Punkterat bakdäck och en gnällig kedja");
         //printOrdersByState(OrderState.NEWLY_CREATED);
-        addRepairTask(1, "Byt däcktub", 400);
-        addRepairTask(1, "Byt kedja", 450);
-        addRepairTask(1, "Smörj kedja", 100);
-        addDiagnosticReport(1, "Vi kommer ta alla dina pengar", "2026-09-30");
-        acceptRepairOrder(1);
+        addRepairTask(orderId, "Byt däcktub", 400);
+        addRepairTask(orderId, "Byt kedja", 450);
+        addRepairTask(orderId, "Smörj kedja", 100);
+        addDiagnosticReport(orderId, "Vi kommer ta alla dina pengar", "2026-09-30");
+        acceptRepairOrder(orderId);
     }
     
     /**
@@ -57,11 +57,12 @@ public class View {
      * @param problemDescription
      */
     
-    public void createRepairOrder(String phoneNumber, String problemDescription) {
+    public int createRepairOrder(String phoneNumber, String problemDescription) {
         int orderId = contr.createNewRepairOrder(phoneNumber, problemDescription);
         System.out.println("\n========== REPAIR ORDER CREATED ==========");
         System.out.println("Order ID: " + orderId);
         System.out.println("==========================================");
+        return orderId;
     }
 
     
